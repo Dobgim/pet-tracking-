@@ -1,0 +1,719 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Pet Paws Journey — Premium pet transport and tracking platform. Track your pet in real-time with live GPS updates, safety guarantees, and professional care.">
+  <title>Pet Paws Journey — Premium Pet Transport &amp; Tracking</title>
+  <link rel="icon" type="image/png" href="favicon.png">
+  <link rel="stylesheet" href="css/style.css">
+  <!-- GSAP for animations -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" defer></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js" defer></script>
+</head>
+<body>
+
+  <!-- ========== HEADER ========== -->
+  <header class="header" id="header">
+    <div class="container header-inner">
+      <a href="index.html" class="logo">
+        <svg viewBox="0 0 36 36" fill="currentColor">
+          <ellipse cx="10" cy="8" rx="3.5" ry="4.5"/>
+          <ellipse cx="26" cy="8" rx="3.5" ry="4.5"/>
+          <ellipse cx="5" cy="19" rx="3" ry="3.5"/>
+          <ellipse cx="31" cy="19" rx="3" ry="3.5"/>
+          <path d="M18 34c-5 0-8-3.5-8-7.5 0-3 3.5-6 8-6s8 3 8 6c0 4-3 7.5-8 7.5z"/>
+        </svg>
+        Pet<span>Paws</span>
+      </a>
+
+      <nav class="nav-links" id="navLinks">
+        <a href="index.html" class="active">Home</a>
+        <a href="about.html">About</a>
+        <a href="services.html">Services</a>
+        <a href="contact.html">Contact</a>
+        <a href="track.html">Track Pet</a>
+      </nav>
+
+      <div class="nav-cta">
+        <a href="track.html" class="btn btn-primary btn-sm">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+          Track Now
+        </a>
+        <div class="mobile-toggle" id="mobileToggle">
+          <span></span>
+          <span></span>
+          <span></span>
+        </div>
+      </div>
+    </div>
+  </header>
+
+
+  <!-- ========== HERO ========== -->
+  <section class="hero">
+    <!-- Background Image Slideshow -->
+    <div class="hero-slideshow">
+      <div class="hero-slide"></div>
+      <div class="hero-slide"></div>
+      <div class="hero-slide"></div>
+      <div class="hero-slide"></div>
+    </div>
+
+    <div class="container hero-grid">
+      <div class="hero-content">
+        <div class="hero-badge">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="16" height="16"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+          Trusted by 15,000+ Pet Owners
+        </div>
+
+        <h1 class="hero-title">
+          Safe &amp; Reliable<br>
+          <span class="highlight">Pet Transport</span><br>
+          Tracking
+        </h1>
+
+        <p class="hero-subtitle">
+          Track your beloved pet in real-time with our advanced GPS tracking system. 
+          Professional handlers, climate-controlled vehicles, and 24/7 monitoring ensure 
+          your pet arrives safely.
+        </p>
+
+        <div class="hero-actions" style="flex-direction: column; align-items: flex-start; gap: 16px;">
+          <form id="heroTrackForm" style="display: flex; gap: 8px; width: 100%; max-width: 480px; position: relative;">
+            <input type="text" id="heroTrackInput" placeholder="Enter tracking code (e.g. PPJ-A8X2K9M3)" required 
+              style="flex: 1; padding: 0 24px; border-radius: var(--radius-full); border: 2px solid var(--gray-200); font-size: 15px; outline: none; transition: all 0.3s; box-shadow: var(--shadow-sm); height: 56px;">
+            <button type="submit" class="btn btn-primary" id="heroTrackBtn" style="border-radius: var(--radius-full); padding: 0 36px; height: 56px; font-size: 16px;">
+              Track
+            </button>
+          </form>
+          <div id="heroTrackError" style="color: var(--danger); font-size: 14px; font-weight: 500; display: none; margin-top: -8px; background: rgba(255,255,255,0.9); padding: 4px 12px; border-radius: 8px;"></div>
+          
+          <a href="services.html" style="font-size: 15px; font-weight: 600; color: rgba(255,255,255,0.85); display: flex; align-items: center; gap: 6px; margin-top: 8px; transition: color 0.3s;">
+            Explore Our Services <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="16" height="16"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12,5 19,12 12,19"/></svg>
+          </a>
+        </div>
+
+        <div class="hero-stats">
+          <div class="hero-stat">
+            <div class="hero-stat-value counter" data-target="15000" data-suffix="+">0</div>
+            <div class="hero-stat-label">Pets Delivered</div>
+          </div>
+          <div class="hero-stat">
+            <div class="hero-stat-value counter" data-target="99" data-suffix="%">0</div>
+            <div class="hero-stat-label">Safety Rate</div>
+          </div>
+          <div class="hero-stat">
+            <div class="hero-stat-value counter" data-target="50" data-suffix="+">0</div>
+            <div class="hero-stat-label">States Covered</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Hero visual card -->
+      <div class="hero-visual">
+        <div class="hero-illustration">
+          <div class="hero-card" id="heroCardContainer" style="transition: all 0.4s ease;">
+            <div class="hero-card-header">
+              <div class="hero-card-icon" id="heroTrackIcon" style="overflow:hidden; border-radius:12px;">
+                <svg viewBox="0 0 36 36" fill="currentColor"><ellipse cx="10" cy="8" rx="3.5" ry="4.5"/><ellipse cx="26" cy="8" rx="3.5" ry="4.5"/><ellipse cx="5" cy="19" rx="3" ry="3.5"/><ellipse cx="31" cy="19" rx="3" ry="3.5"/><path d="M18 34c-5 0-8-3.5-8-7.5 0-3 3.5-6 8-6s8 3 8 6c0 4-3 7.5-8 7.5z"/></svg>
+              </div>
+              <div>
+                <div class="hero-card-title" id="heroTrackName">Buddy</div>
+                <div class="hero-card-subtitle" id="heroTrackBreed">Golden Retriever</div>
+              </div>
+              <span class="status-badge" id="heroTrackBadge" style="margin-left:auto; display:none; background:rgba(232, 119, 58, 0.1); color:var(--primary); padding:4px 8px; border-radius:12px; font-size:12px; font-weight:600;">Active</span>
+            </div>
+            <div class="hero-pet-info">
+              <div class="hero-pet-field">
+                <div class="hero-pet-field-label">From</div>
+                <div class="hero-pet-field-value" id="heroTrackOrigin">New York, NY</div>
+              </div>
+              <div class="hero-pet-field">
+                <div class="hero-pet-field-label">To</div>
+                <div class="hero-pet-field-value" id="heroTrackDest">Los Angeles, CA</div>
+              </div>
+              <div class="hero-pet-field">
+                <div class="hero-pet-field-label">Status</div>
+                <div class="hero-pet-field-value" id="heroTrackStatus" style="color:var(--primary); text-transform:capitalize;">In Transit</div>
+              </div>
+              <div class="hero-pet-field">
+                <div class="hero-pet-field-label">ETA</div>
+                <div class="hero-pet-field-value" id="heroTrackETA">Apr 18, 2026</div>
+              </div>
+            </div>
+            <div class="hero-progress" id="heroTrackProgress">
+              <div class="hero-progress-step active"></div>
+              <div class="hero-progress-step active"></div>
+              <div class="hero-progress-step current"></div>
+              <div class="hero-progress-step"></div>
+              <div class="hero-progress-step"></div>
+            </div>
+            <div style="margin-top: 16px; text-align: center; border-top: 1px dashed var(--gray-200); padding-top: 12px; display: none;" id="heroTrackFullDetails">
+              <a href="#" id="heroTrackLink" class="btn btn-outline" style="width:100%; justify-content:center; padding:8px; font-size:13px; height:auto; border-color:var(--gray-200);">View Full Live Map &rarr;</a>
+            </div>
+          </div>
+
+          <!-- Floating badges -->
+          <div class="hero-float hero-float-1">
+            <svg viewBox="0 0 24 24" fill="none" stroke="#2D8B5F" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="20" height="20"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22,4 12,14.01 9,11.01"/></svg>
+            <div>
+              <div class="hero-float-text">GPS Active</div>
+              <div class="hero-float-sub">Real-time tracking</div>
+            </div>
+          </div>
+
+          <div class="hero-float hero-float-2">
+            <svg viewBox="0 0 24 24" fill="none" stroke="#E8773A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="20" height="20"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+            <div>
+              <div class="hero-float-text">Pet Safe</div>
+              <div class="hero-float-sub">Temp: 72F</div>
+            </div>
+          </div>
+
+          <div class="hero-float hero-float-3">
+            <svg viewBox="0 0 24 24" fill="none" stroke="#3B82F6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="20" height="20"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+            <div>
+              <div class="hero-float-text">Denver, CO</div>
+              <div class="hero-float-sub">Current location</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ========== SERVICES ========== -->
+  <section class="section" id="services">
+    <div class="container">
+      <div class="section-header reveal">
+        <div class="section-label">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="8" cy="6" rx="2.5" ry="3"/><ellipse cx="16" cy="6" rx="2.5" ry="3"/><ellipse cx="5" cy="13" rx="2" ry="2.5"/><ellipse cx="19" cy="13" rx="2" ry="2.5"/><path d="M12 22c-3 0-5-2.5-5-5 0-2 2-4 5-4s5 2 5 4c0 2.5-2 5-5 5z"/></svg>
+          Our Services
+        </div>
+        <h2 class="section-title">Complete Pet Transport Solutions</h2>
+        <p class="section-subtitle">
+          From door-to-door pickup to live GPS tracking, we handle every aspect
+          of your pet's journey with care, precision, and love.
+        </p>
+      </div>
+
+      <div class="services-grid stagger-children" style="grid-template-columns: repeat(3, 1fr)">
+        <div class="service-card">
+          <div class="service-icon orange">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="3" width="15" height="13"/><polygon points="16,8 20,8 23,11 23,16 16,16"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg>
+          </div>
+          <h3>Ground Transport</h3>
+          <p>Climate-controlled vehicles with certified handlers ensure your pet travels safely and comfortably across all 50 states. Every rest stop is carefully planned.</p>
+        </div>
+
+        <div class="service-card">
+          <div class="service-icon green">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+          </div>
+          <h3>Live GPS Tracking</h3>
+          <p>Track your pet in real-time on an interactive map with instant updates on location, current status, ambient temperature, and estimated arrival time.</p>
+        </div>
+
+        <div class="service-card">
+          <div class="service-icon blue">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17.8 19.2L16 11l3.5-3.5C21 6 21.5 4 21 3c-1-.5-3 0-4.5 1.5L13 8 4.8 6.2c-.5-.1-.9.1-1.1.5l-.3.5c-.2.5-.1 1 .3 1.3L9 12l-2 3H4l-1 1 3 2 2 3 1-1v-3l3-2 3.5 5.3c.3.4.8.5 1.3.3l.5-.2c.4-.3.6-.7.5-1.2z"/></svg>
+          </div>
+          <h3>Air Transport</h3>
+          <p>For urgent or long-distance relocation, our air transport uses IATA-approved carriers and pressurized, temperature-controlled cargo holds for a fast, safe flight.</p>
+        </div>
+
+        <div class="service-card">
+          <div class="service-icon orange">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+          </div>
+          <h3>International Shipping</h3>
+          <p>Moving abroad? We manage all health certificates, import permits, customs clearance, and quarantine requirements so you can focus on the move, not the paperwork.</p>
+        </div>
+
+        <div class="service-card">
+          <div class="service-icon green">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22,4 12,14.01 9,11.01"/></svg>
+          </div>
+          <h3>Vet-Attended Care</h3>
+          <p>For senior pets or those with medical conditions, we offer vet-attended transport with on-call veterinary support, medication schedules, and continuous health monitoring.</p>
+        </div>
+
+        <div class="service-card">
+          <div class="service-icon blue">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+          </div>
+          <h3>Safety &amp; Insurance</h3>
+          <p>Every shipment is fully insured up to $10,000. Our USDA-licensed operation includes 24/7 monitoring, regular health checks, and photo updates at each stop.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ========== HOW IT WORKS ========== -->
+  <section class="section section-cream" id="how-it-works">
+    <div class="container">
+      <div class="section-header reveal">
+        <div class="section-label">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
+          How It Works
+        </div>
+        <h2 class="section-title">Three Simple Steps</h2>
+        <p class="section-subtitle">
+          Getting your pet transported safely is easier than you think.
+        </p>
+      </div>
+
+      <div class="steps-grid stagger-children">
+        <div class="step-card">
+          <div class="step-number">1</div>
+          <h3>Book Transport</h3>
+          <p>Fill out our simple booking form with your pet's details, pickup location, and destination. We'll confirm within hours.</p>
+        </div>
+        <div class="step-card">
+          <div class="step-number">2</div>
+          <h3>Track In Real-Time</h3>
+          <p>Receive a unique tracking code and follow your pet's journey live on our interactive GPS map with real-time updates.</p>
+        </div>
+        <div class="step-card">
+          <div class="step-number">3</div>
+          <h3>Receive Your Pet</h3>
+          <p>Your pet arrives safely at the destination. Our handler will ensure a smooth handover with all health documentation.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ========== TESTIMONIALS ========== -->
+  <section class="section" id="testimonials" style="overflow:hidden">
+    <div class="container">
+      <div class="section-header reveal">
+        <div class="section-label">
+          <svg viewBox="0 0 24 24" fill="currentColor" width="16" height="16"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/></svg>
+          Client Reviews
+        </div>
+        <h2 class="section-title">Loved by Pet Owners Worldwide</h2>
+        <p class="section-subtitle">Over 15,000 successful pet journeys. Here's what our clients have to say.</p>
+      </div>
+
+      <!-- Rating Bar -->
+      <div class="reveal" style="display:flex;align-items:center;justify-content:center;gap:32px;margin-bottom:56px;flex-wrap:wrap;background:var(--cream);border-radius:var(--radius-xl);padding:28px 40px;border:1px solid var(--gray-200)">
+        <div style="display:flex;align-items:center;gap:12px">
+          <span style="font-size:52px;font-weight:800;color:var(--dark);line-height:1">4.9</span>
+          <div>
+            <div style="display:flex;gap:3px;color:#F59E0B;margin-bottom:4px">
+              <svg viewBox="0 0 24 24" fill="currentColor" width="20" height="20"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/></svg>
+              <svg viewBox="0 0 24 24" fill="currentColor" width="20" height="20"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/></svg>
+              <svg viewBox="0 0 24 24" fill="currentColor" width="20" height="20"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/></svg>
+              <svg viewBox="0 0 24 24" fill="currentColor" width="20" height="20"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/></svg>
+              <svg viewBox="0 0 24 24" fill="currentColor" width="20" height="20"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/></svg>
+            </div>
+            <div style="font-size:13px;color:var(--gray-400);font-weight:500">Based on 2,847 verified reviews</div>
+          </div>
+        </div>
+        <div style="height:48px;width:1px;background:var(--gray-200)"></div>
+        <div style="display:flex;gap:40px;flex-wrap:wrap">
+          <div style="text-align:center"><div style="font-size:26px;font-weight:800;color:var(--primary)">98%</div><div style="font-size:12px;color:var(--gray-500);font-weight:500;margin-top:2px">Would Recommend</div></div>
+          <div style="text-align:center"><div style="font-size:26px;font-weight:800;color:var(--secondary)">15K+</div><div style="font-size:12px;color:var(--gray-500);font-weight:500;margin-top:2px">Pets Delivered</div></div>
+          <div style="text-align:center"><div style="font-size:26px;font-weight:800;color:var(--info)">4.9&#9733;</div><div style="font-size:12px;color:var(--gray-500);font-weight:500;margin-top:2px">Google Rating</div></div>
+          <div style="text-align:center"><div style="font-size:26px;font-weight:800;color:var(--warning)">24/7</div><div style="font-size:12px;color:var(--gray-500);font-weight:500;margin-top:2px">Support Available</div></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Auto-scrolling marquee -->
+    <div class="reviews-marquee-wrap">
+      <div class="reviews-marquee" id="marquee1">
+        <div class="testimonial-card tmq-card">
+          <div class="testimonial-stars"><svg viewBox="0 0 24 24" fill="#F59E0B" width="16" height="16"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/></svg><svg viewBox="0 0 24 24" fill="#F59E0B" width="16" height="16"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/></svg><svg viewBox="0 0 24 24" fill="#F59E0B" width="16" height="16"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/></svg><svg viewBox="0 0 24 24" fill="#F59E0B" width="16" height="16"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/></svg><svg viewBox="0 0 24 24" fill="#F59E0B" width="16" height="16"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/></svg></div>
+          <p class="testimonial-text">"I watched Bruno's journey from Miami to Seattle live on GPS. He arrived happy and healthy, wagging his tail. Truly outstanding service!"</p>
+          <div class="testimonial-author"><div class="testimonial-avatar" style="background:linear-gradient(135deg,#E8773A,#D35400)">SJ</div><div><div class="testimonial-name">Sarah Johnson</div><div class="testimonial-role">Dog Owner &mdash; Miami, FL</div></div></div>
+        </div>
+        <div class="testimonial-card tmq-card">
+          <div class="testimonial-stars"><svg viewBox="0 0 24 24" fill="#F59E0B" width="16" height="16"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/></svg><svg viewBox="0 0 24 24" fill="#F59E0B" width="16" height="16"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/></svg><svg viewBox="0 0 24 24" fill="#F59E0B" width="16" height="16"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/></svg><svg viewBox="0 0 24 24" fill="#F59E0B" width="16" height="16"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/></svg><svg viewBox="0 0 24 24" fill="#F59E0B" width="16" height="16"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/></svg></div>
+          <p class="testimonial-text">"Relocated NYC to Portland with both cats. Temperature-controlled 2,800 miles. Driver sent photo updates at every stop. Could not ask for better!"</p>
+          <div class="testimonial-author"><div class="testimonial-avatar" style="background:linear-gradient(135deg,#2D8B5F,#1a6b45)">MR</div><div><div class="testimonial-name">Michael Roberts</div><div class="testimonial-role">Cat Owner &mdash; Portland, OR</div></div></div>
+        </div>
+        <div class="testimonial-card tmq-card">
+          <div class="testimonial-stars"><svg viewBox="0 0 24 24" fill="#F59E0B" width="16" height="16"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/></svg><svg viewBox="0 0 24 24" fill="#F59E0B" width="16" height="16"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/></svg><svg viewBox="0 0 24 24" fill="#F59E0B" width="16" height="16"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/></svg><svg viewBox="0 0 24 24" fill="#F59E0B" width="16" height="16"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/></svg><svg viewBox="0 0 24 24" fill="#F59E0B" width="16" height="16"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/></svg></div>
+          <p class="testimonial-text">"My African Grey Kiwi needed specific humidity. The team custom-configured the enclosure throughout. Kiwi arrived singing! Absolutely world-class service."</p>
+          <div class="testimonial-author"><div class="testimonial-avatar" style="background:linear-gradient(135deg,#8B5CF6,#6D28D9)">LP</div><div><div class="testimonial-name">Lisa Patel</div><div class="testimonial-role">Bird Owner &mdash; Austin, TX</div></div></div>
+        </div>
+        <div class="testimonial-card tmq-card">
+          <div class="testimonial-stars"><svg viewBox="0 0 24 24" fill="#F59E0B" width="16" height="16"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/></svg><svg viewBox="0 0 24 24" fill="#F59E0B" width="16" height="16"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/></svg><svg viewBox="0 0 24 24" fill="#F59E0B" width="16" height="16"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/></svg><svg viewBox="0 0 24 24" fill="#F59E0B" width="16" height="16"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/></svg><svg viewBox="0 0 24 24" fill="#F59E0B" width="16" height="16"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/></svg></div>
+          <p class="testimonial-text">"Military deployment meant shipping Rex across 3 states fast. Pet Paws handled paperwork, vet checks, everything. Rex was treated like royalty. Forever grateful."</p>
+          <div class="testimonial-author"><div class="testimonial-avatar" style="background:linear-gradient(135deg,#3B82F6,#1D4ED8)">JM</div><div><div class="testimonial-name">James Mitchell</div><div class="testimonial-role">Dog Owner &mdash; San Diego, CA</div></div></div>
+        </div>
+        <div class="testimonial-card tmq-card">
+          <div class="testimonial-stars"><svg viewBox="0 0 24 24" fill="#F59E0B" width="16" height="16"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/></svg><svg viewBox="0 0 24 24" fill="#F59E0B" width="16" height="16"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/></svg><svg viewBox="0 0 24 24" fill="#F59E0B" width="16" height="16"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/></svg><svg viewBox="0 0 24 24" fill="#F59E0B" width="16" height="16"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/></svg><svg viewBox="0 0 24 24" fill="#F59E0B" width="16" height="16"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/></svg></div>
+          <p class="testimonial-text">"As a professional breeder I have used many transport companies. Pet Paws Journey is in a league of their own. I switched permanently and never looking back."</p>
+          <div class="testimonial-author"><div class="testimonial-avatar" style="background:linear-gradient(135deg,#EC4899,#BE185D)">AW</div><div><div class="testimonial-name">Amanda Williams</div><div class="testimonial-role">Professional Breeder &mdash; Denver, CO</div></div></div>
+        </div>
+        <div class="testimonial-card tmq-card">
+          <div class="testimonial-stars"><svg viewBox="0 0 24 24" fill="#F59E0B" width="16" height="16"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/></svg><svg viewBox="0 0 24 24" fill="#F59E0B" width="16" height="16"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/></svg><svg viewBox="0 0 24 24" fill="#F59E0B" width="16" height="16"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/></svg><svg viewBox="0 0 24 24" fill="#F59E0B" width="16" height="16"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/></svg><svg viewBox="0 0 24 24" fill="#F59E0B" width="16" height="16"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/></svg></div>
+          <p class="testimonial-text">"Goldie is 11 years old. I was terrified. The handler called me after drop-off just to make sure she settled in. That personal care is absolutely priceless."</p>
+          <div class="testimonial-author"><div class="testimonial-avatar" style="background:linear-gradient(135deg,#F59E0B,#D97706)">DK</div><div><div class="testimonial-name">David Kim</div><div class="testimonial-role">Dog Owner &mdash; Chicago, IL</div></div></div>
+        </div>
+        <div class="testimonial-card tmq-card">
+          <div class="testimonial-stars"><svg viewBox="0 0 24 24" fill="#F59E0B" width="16" height="16"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/></svg><svg viewBox="0 0 24 24" fill="#F59E0B" width="16" height="16"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/></svg><svg viewBox="0 0 24 24" fill="#F59E0B" width="16" height="16"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/></svg><svg viewBox="0 0 24 24" fill="#F59E0B" width="16" height="16"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/></svg><svg viewBox="0 0 24 24" fill="#F59E0B" width="16" height="16"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/></svg></div>
+          <p class="testimonial-text">"Flying internationally with my Husky felt impossible. Pet Paws handled all documentation, quarantine prep, and handover. Thor arrived in London without a single hitch!"</p>
+          <div class="testimonial-author"><div class="testimonial-avatar" style="background:linear-gradient(135deg,#06B6D4,#0891B2)">RT</div><div><div class="testimonial-name">Rachel Thompson</div><div class="testimonial-role">Dog Owner &mdash; London, UK</div></div></div>
+        </div>
+        <div class="testimonial-card tmq-card">
+          <div class="testimonial-stars"><svg viewBox="0 0 24 24" fill="#F59E0B" width="16" height="16"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/></svg><svg viewBox="0 0 24 24" fill="#F59E0B" width="16" height="16"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/></svg><svg viewBox="0 0 24 24" fill="#F59E0B" width="16" height="16"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/></svg><svg viewBox="0 0 24 24" fill="#F59E0B" width="16" height="16"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/></svg><svg viewBox="0 0 24 24" fill="#F59E0B" width="16" height="16"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/></svg></div>
+          <p class="testimonial-text">"My diabetic cat Mango needs insulin twice daily. The vet-attended option gave me complete peace of mind on a 1,400-mile route. The schedule was kept perfectly. Exceptional."</p>
+          <div class="testimonial-author"><div class="testimonial-avatar" style="background:linear-gradient(135deg,#10B981,#047857)">CN</div><div><div class="testimonial-name">Carlos Nguyen</div><div class="testimonial-role">Cat Owner &mdash; Houston, TX</div></div></div>
+        </div>
+        <!-- Duplicates for seamless loop -->
+        <div class="testimonial-card tmq-card">
+          <div class="testimonial-stars"><svg viewBox="0 0 24 24" fill="#F59E0B" width="16" height="16"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/></svg><svg viewBox="0 0 24 24" fill="#F59E0B" width="16" height="16"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/></svg><svg viewBox="0 0 24 24" fill="#F59E0B" width="16" height="16"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/></svg><svg viewBox="0 0 24 24" fill="#F59E0B" width="16" height="16"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/></svg><svg viewBox="0 0 24 24" fill="#F59E0B" width="16" height="16"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/></svg></div>
+          <p class="testimonial-text">"I watched Bruno's journey from Miami to Seattle live on GPS. He arrived happy and healthy, wagging his tail. Truly outstanding service!"</p>
+          <div class="testimonial-author"><div class="testimonial-avatar" style="background:linear-gradient(135deg,#E8773A,#D35400)">SJ</div><div><div class="testimonial-name">Sarah Johnson</div><div class="testimonial-role">Dog Owner &mdash; Miami, FL</div></div></div>
+        </div>
+        <div class="testimonial-card tmq-card">
+          <div class="testimonial-stars"><svg viewBox="0 0 24 24" fill="#F59E0B" width="16" height="16"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/></svg><svg viewBox="0 0 24 24" fill="#F59E0B" width="16" height="16"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/></svg><svg viewBox="0 0 24 24" fill="#F59E0B" width="16" height="16"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/></svg><svg viewBox="0 0 24 24" fill="#F59E0B" width="16" height="16"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/></svg><svg viewBox="0 0 24 24" fill="#F59E0B" width="16" height="16"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/></svg></div>
+          <p class="testimonial-text">"Relocated NYC to Portland with both cats. Temperature-controlled 2,800 miles. Driver sent photo updates at every stop. Could not ask for better!"</p>
+          <div class="testimonial-author"><div class="testimonial-avatar" style="background:linear-gradient(135deg,#2D8B5F,#1a6b45)">MR</div><div><div class="testimonial-name">Michael Roberts</div><div class="testimonial-role">Cat Owner &mdash; Portland, OR</div></div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== FAQ ========== -->
+  <section class="section section-cream" id="faq">
+    <div class="container">
+      <div class="section-header reveal">
+        <div class="section-label">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
+          FAQ
+        </div>
+        <h2 class="section-title">Frequently Asked Questions</h2>
+        <p class="section-subtitle">Everything you need to know about our pet transport service.</p>
+      </div>
+
+      <div class="faq-list">
+        <div class="faq-item">
+          <button class="faq-question">
+            How do I track my pet during transport?
+            <svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6,9 12,15 18,9"/></svg>
+          </button>
+          <div class="faq-answer">
+            <div class="faq-answer-inner">
+              Once your shipment is created, you will receive a unique tracking code (e.g. PT-A8X2K9M3). 
+              Visit our Track Pet page, enter the code, and you will see your pet's live location on an 
+              interactive map, along with status updates and estimated arrival time.
+            </div>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question">
+            What types of pets do you transport?
+            <svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6,9 12,15 18,9"/></svg>
+          </button>
+          <div class="faq-answer">
+            <div class="faq-answer-inner">
+              We transport dogs, cats, birds, rabbits, reptiles, and other domestic pets. Each pet type 
+              has specialized handling procedures and vehicle configurations to ensure maximum comfort 
+              and safety. Contact us for exotic pet transport inquiries.
+            </div>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question">
+            Is my pet insured during transport?
+            <svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6,9 12,15 18,9"/></svg>
+          </button>
+          <div class="faq-answer">
+            <div class="faq-answer-inner">
+              Yes. Every pet shipment includes comprehensive insurance coverage. In the unlikely event 
+              of any incident, you are fully covered. We also provide health monitoring throughout the 
+              journey and have veterinary contacts at regular checkpoints along every route.
+            </div>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question">
+            How long does shipping take?
+            <svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6,9 12,15 18,9"/></svg>
+          </button>
+          <div class="faq-answer">
+            <div class="faq-answer-inner">
+              Delivery times vary based on distance, route, and transport method. Ground transport 
+              typically takes 2-7 days for domestic shipments. Air transport can reduce this to 1-2 
+              days. You will always receive an estimated delivery date when your shipment is created.
+            </div>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question">
+            What safety measures are in place?
+            <svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6,9 12,15 18,9"/></svg>
+          </button>
+          <div class="faq-answer">
+            <div class="faq-answer-inner">
+              Our vehicles feature climate control, GPS tracking, secure individual compartments, 
+              regular rest stops with exercise time, feeding schedules based on your instructions, 
+              and 24/7 monitoring. All handlers are trained professionals with years of animal 
+              care experience.
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ========== CTA ========== -->
+  <section class="cta-section">
+    <div class="container cta-content">
+      <h2>Track Your Pet Now</h2>
+      <p>Enter your tracking code below to see your pet's live location and status updates.</p>
+      <form class="cta-search" onsubmit="event.preventDefault(); const c = this.querySelector('input').value.trim(); if(c) window.location.href='track.html?code='+c;">
+        <input type="text" placeholder="Enter tracking code (e.g. PPJ-A8X2K9M3)" required>
+        <button type="submit">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+          Track
+        </button>
+      </form>
+    </div>
+  </section>
+
+
+  <!-- ========== FOOTER ========== -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <a href="index.html" class="logo">
+            <svg viewBox="0 0 36 36" fill="currentColor" width="32" height="32">
+              <ellipse cx="10" cy="8" rx="3.5" ry="4.5"/>
+              <ellipse cx="26" cy="8" rx="3.5" ry="4.5"/>
+              <ellipse cx="5" cy="19" rx="3" ry="3.5"/>
+              <ellipse cx="31" cy="19" rx="3" ry="3.5"/>
+              <path d="M18 34c-5 0-8-3.5-8-7.5 0-3 3.5-6 8-6s8 3 8 6c0 4-3 7.5-8 7.5z"/>
+            </svg>
+            Pet<span>Paws</span>
+          </a>
+          <p>Premium pet transport and tracking platform. Ensuring your beloved companions travel safely with real-time GPS monitoring.</p>
+          <div class="footer-social">
+            <a href="#" aria-label="Facebook">
+              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"/></svg>
+            </a>
+            <a href="#" aria-label="Twitter">
+              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M23 3a10.9 10.9 0 01-3.14 1.53 4.48 4.48 0 00-7.86 3v1A10.66 10.66 0 013 4s-4 9 5 13a11.64 11.64 0 01-7 2c9 5 20 0 20-11.5a4.5 4.5 0 00-.08-.83A7.72 7.72 0 0023 3z"/></svg>
+            </a>
+            <a href="#" aria-label="Instagram">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+            </a>
+            <a href="#" aria-label="LinkedIn">
+              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6zM2 9h4v12H2zM4 6a2 2 0 100-4 2 2 0 000 4z"/></svg>
+            </a>
+          </div>
+        </div>
+
+        <div class="footer-column">
+          <h4>Quick Links</h4>
+          <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="about.html">About Us</a></li>
+            <li><a href="services.html">Services</a></li>
+            <li><a href="contact.html">Contact</a></li>
+            <li><a href="track.html">Track Pet</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-column">
+          <h4>Services</h4>
+          <ul>
+            <li><a href="services.html">Ground Transport</a></li>
+            <li><a href="services.html">Air Transport</a></li>
+            <li><a href="services.html">International Shipping</a></li>
+            <li><a href="services.html">Live Tracking</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-column">
+          <h4>Contact</h4>
+          <ul>
+            <li>
+              <a href="tel:+18005557387">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="14" height="14"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+                +1 (800) 555-7387
+              </a>
+            </li>
+            <li>
+              <a href="mailto:info@petpawsjourney.com">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="14" height="14"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+                info@petpawsjourney.com
+              </a>
+            </li>
+            <li>
+              <a href="#">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="14" height="14"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                New York, NY 10001
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <p>2026 Pet Paws Journey. All rights reserved.</p>
+        <div class="footer-bottom-links">
+          <a href="#">Privacy Policy</a>
+          <a href="#">Terms of Service</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Supabase -->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="js/supabase-config.js"></script>
+
+  <!-- Scripts -->
+  <script src="js/main.js"></script>
+  
+  <!-- Index Tracking Inject -->
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const heroForm = document.getElementById('heroTrackForm');
+      const heroInput = document.getElementById('heroTrackInput');
+      const heroBtn = document.getElementById('heroTrackBtn');
+      const heroError = document.getElementById('heroTrackError');
+      const heroCard = document.getElementById('heroCardContainer');
+
+      if (heroForm && typeof supabaseClient !== 'undefined') {
+        // Date Formatter
+        const formatETA = (isoStr) => {
+          if (!isoStr) return 'TBD';
+          const d = new Date(isoStr);
+          return d.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
+        };
+        
+        // Status label mapper
+        const statusMap = {
+          'order_created': 'Order Created',
+          'picked_up': 'Picked Up',
+          'in_transit': 'In Transit',
+          'out_for_delivery': 'Out for Delivery',
+          'delivered': 'Delivered'
+        };
+
+        heroForm.addEventListener('submit', async (e) => {
+          e.preventDefault();
+          const code = heroInput.value.trim().toUpperCase();
+          if (!code) return;
+
+          // Loading state
+          heroBtn.innerHTML = '<span class="spinner" style="width:16px;height:16px;border-width:2px;display:inline-block;border-color:white;border-top-color:transparent;"></span>';
+          heroBtn.disabled = true;
+          heroError.style.display = 'none';
+
+          try {
+            // Query local database directly from homepage
+            const { data: shipment, error } = await supabaseClient
+              .from('pet_shipments')
+              .select('*')
+              .eq('tracking_code', code)
+              .single();
+
+            heroBtn.innerHTML = 'Track';
+            heroBtn.disabled = false;
+
+            if (error || !shipment) {
+              heroError.textContent = 'Tracking code not found. Check and try again.';
+              heroError.style.display = 'block';
+              return;
+            }
+
+            // Visual feedback - glow
+            heroCard.style.boxShadow = '0 0 0 4px rgba(232, 119, 58, 0.2)';
+            setTimeout(() => { heroCard.style.boxShadow = ''; }, 600);
+
+            // Populate Card
+            document.getElementById('heroTrackName').textContent = shipment.pet_name;
+            document.getElementById('heroTrackBreed').textContent = (shipment.pet_breed ? shipment.pet_breed + ' ' : '') + shipment.pet_type;
+            
+            // Image or Icon
+            if(shipment.pet_image_url) {
+              document.getElementById('heroTrackIcon').innerHTML = `<img src="${shipment.pet_image_url}" style="width:100%; height:100%; object-fit:cover;">`;
+            } else {
+              document.getElementById('heroTrackIcon').innerHTML = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="32" height="32" style="margin:20px; color:var(--primary);"><path d="M12 22c-3 0-5-2.5-5-5 0-2 2-4 5-4s5 2 5 4c0 2.5-2 5-5 5z"/><ellipse cx="8" cy="6" rx="2.5" ry="3"/><ellipse cx="16" cy="6" rx="2.5" ry="3"/><ellipse cx="5" cy="13" rx="2" ry="2.5"/><ellipse cx="19" cy="13" rx="2" ry="2.5"/></svg>`;
+              document.getElementById('heroTrackIcon').style.background = 'var(--warm-100)';
+            }
+
+            // Fields
+            // Use city, state parsing or full address if short
+            const shorten = (addr) => addr ? (addr.split(',').slice(0, 2).join(',').trim()) : 'Unknown';
+            document.getElementById('heroTrackOrigin').textContent = shorten(shipment.origin_address);
+            document.getElementById('heroTrackDest').textContent = shorten(shipment.destination_address);
+            document.getElementById('heroTrackStatus').textContent = statusMap[shipment.current_status] || shipment.current_status;
+            document.getElementById('heroTrackETA').textContent = formatETA(shipment.estimated_delivery);
+
+            // Badge
+            const badge = document.getElementById('heroTrackBadge');
+            badge.style.display = 'block';
+            if (shipment.current_status === 'delivered') {
+               badge.style.color = 'var(--success)';
+               badge.style.background = 'rgba(34, 197, 94, 0.1)';
+               badge.textContent = 'Delivered';
+               document.getElementById('heroTrackStatus').style.color = 'var(--success)';
+            } else {
+               badge.style.color = 'var(--primary)';
+               badge.style.background = 'rgba(232, 119, 58, 0.1)';
+               badge.textContent = 'Active';
+               document.getElementById('heroTrackStatus').style.color = 'var(--primary)';
+            }
+
+            // Progress Bar
+            const statusOrder = ['order_created', 'picked_up', 'in_transit', 'out_for_delivery', 'delivered'];
+            const currentIndex = statusOrder.indexOf(shipment.current_status);
+            let progressHtml = '';
+            for(let i = 0; i < 5; i++) {
+              if (i < currentIndex) progressHtml += `<div class="hero-progress-step active"></div>`;
+              else if (i === currentIndex) progressHtml += `<div class="hero-progress-step current"></div>`;
+              else progressHtml += `<div class="hero-progress-step"></div>`;
+            }
+            document.getElementById('heroTrackProgress').innerHTML = progressHtml;
+
+            // Link to full details
+            document.getElementById('heroTrackFullDetails').style.display = 'block';
+            document.getElementById('heroTrackLink').href = `track.html?code=${code}`;
+
+            // Optional: Also update the floating badges to reflect real data if you want, but this proves the concept!
+
+          } catch (err) {
+            heroBtn.innerHTML = 'Track';
+            heroBtn.disabled = false;
+            heroError.textContent = 'An error occurred. Please try again.';
+            heroError.style.display = 'block';
+          }
+        });
+        
+        // Also: auto-load if tracking code in URL parameter (for sharing)
+        const params = new URLSearchParams(window.location.search);
+        const codeParam = params.get('tracking');
+        if (codeParam) {
+           heroInput.value = codeParam;
+           heroForm.dispatchEvent(new Event('submit'));
+        }
+      }
+    });
+  </script>
+
+  <!-- Floating WhatsApp Chat Button -->
+  <a href="https://wa.me/18005557387?text=Hi%20Pet%20Paws%20Journey!%20I'd%20like%20to%20inquire%20about%20pet%20transport%20services." target="_blank" rel="noopener noreferrer" class="floating-chat-btn" aria-label="Chat on WhatsApp">
+    <svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg"><path d="M16.004 0C7.164 0 0 7.163 0 16.004c0 2.825.736 5.584 2.137 8.012L.073 32l8.174-2.044A15.94 15.94 0 0016.004 32C24.84 32 32 24.837 32 16.004 32 7.163 24.84 0 16.004 0zm0 29.32a13.27 13.27 0 01-7.14-2.073l-.512-.304-5.31 1.327 1.394-5.095-.332-.529A13.28 13.28 0 012.68 16.004c0-7.35 5.978-13.324 13.324-13.324 7.35 0 13.316 5.974 13.316 13.324 0 7.35-5.966 13.316-13.316 13.316zm7.3-9.972c-.4-.2-2.366-1.168-2.732-1.3-.368-.134-.635-.2-.902.2-.268.4-1.035 1.3-1.27 1.57-.232.267-.467.3-.867.1-.4-.2-1.688-.622-3.216-1.984-1.188-1.06-1.99-2.37-2.223-2.77-.233-.4-.025-.616.175-.815.18-.18.4-.467.6-.7.2-.234.268-.4.4-.668.134-.268.067-.5-.033-.7-.1-.2-.902-2.172-1.235-2.974-.325-.78-.655-.674-.902-.687l-.77-.013c-.267 0-.7.1-1.067.5s-1.4 1.37-1.4 3.34c0 1.97 1.434 3.873 1.634 4.14.2.268 2.822 4.31 6.838 6.044.955.413 1.7.66 2.28.845.958.304 1.83.262 2.52.16.77-.116 2.367-.97 2.7-1.904.334-.935.334-1.737.234-1.903-.1-.168-.367-.268-.767-.468z"/></svg>
+  </a>
+  <div class="floating-chat-tooltip">Chat with us on WhatsApp</div>
+
+</body>
+</html>

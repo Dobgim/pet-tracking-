@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Learn about Pet Paws Journey — our mission, team, and commitment to safe pet transport. Trusted by 15,000+ pet owners nationwide.">
+  <title>About Us — Pet Paws Journey</title>
+  <link rel="icon" type="image/png" href="favicon.png">
+  <link rel="stylesheet" href="css/style.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" defer></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js" defer></script>
+</head>
+<body>
+
+  <!-- HEADER (same as index) -->
+  <header class="header" id="header">
+    <div class="container header-inner">
+      <a href="index.html" class="logo">
+        <svg viewBox="0 0 36 36" fill="currentColor"><ellipse cx="10" cy="8" rx="3.5" ry="4.5"/><ellipse cx="26" cy="8" rx="3.5" ry="4.5"/><ellipse cx="5" cy="19" rx="3" ry="3.5"/><ellipse cx="31" cy="19" rx="3" ry="3.5"/><path d="M18 34c-5 0-8-3.5-8-7.5 0-3 3.5-6 8-6s8 3 8 6c0 4-3 7.5-8 7.5z"/></svg>
+        Pet<span>Paws</span>
+      </a>
+      <nav class="nav-links" id="navLinks">
+        <a href="index.html">Home</a>
+        <a href="about.html" class="active">About</a>
+        <a href="services.html">Services</a>
+        <a href="contact.html">Contact</a>
+        <a href="track.html">Track Pet</a>
+      </nav>
+      <div class="nav-cta">
+        <a href="track.html" class="btn btn-primary btn-sm">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+          Track Now
+        </a>
+        <div class="mobile-toggle" id="mobileToggle"><span></span><span></span><span></span></div>
+      </div>
+    </div>
+  </header>
+
+  <!-- PAGE HERO -->
+  <section class="page-hero">
+    <div class="container">
+      <div class="breadcrumb">
+        <a href="index.html">Home</a>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9,18 15,12 9,6"/></svg>
+        <span>About Us</span>
+      </div>
+      <h1>About Pet Paws Journey</h1>
+      <p>We are dedicated to making pet transport safe, transparent, and stress-free for every pet owner.</p>
+    </div>
+  </section>
+
+  <!-- OUR STORY -->
+  <section class="section">
+    <div class="container">
+      <div class="about-story">
+        <div class="about-story-image reveal-left">
+          <svg viewBox="0 0 36 36" fill="currentColor"><ellipse cx="10" cy="8" rx="3.5" ry="4.5"/><ellipse cx="26" cy="8" rx="3.5" ry="4.5"/><ellipse cx="5" cy="19" rx="3" ry="3.5"/><ellipse cx="31" cy="19" rx="3" ry="3.5"/><path d="M18 34c-5 0-8-3.5-8-7.5 0-3 3.5-6 8-6s8 3 8 6c0 4-3 7.5-8 7.5z"/></svg>
+        </div>
+        <div class="reveal-right">
+          <div class="section-label">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+            Our Story
+          </div>
+          <h2>Born From a Love of Animals</h2>
+          <p>Pet Paws Journey was founded in 2019 by a team of animal lovers and logistics professionals who saw a critical gap in the pet transport industry. Too many pets were being shipped without adequate tracking, safety protocols, or transparency.</p>
+          <p>We set out to build a platform that treats every pet like family. Our technology-first approach combines real-time GPS tracking, climate-controlled vehicles, and professional handlers to deliver a premium transport experience.</p>
+          <p>Today, we have safely transported over 15,000 pets across all 50 states, earning the trust of families, breeders, and rescue organizations nationwide.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- MISSION, VISION, VALUES -->
+  <section class="section section-cream">
+    <div class="container">
+      <div class="section-header reveal">
+        <div class="section-label">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg>
+          What Drives Us
+        </div>
+        <h2 class="section-title">Our Mission &amp; Values</h2>
+        <p class="section-subtitle">Every decision we make is guided by our commitment to animal welfare and customer satisfaction.</p>
+      </div>
+
+      <div class="values-grid stagger-children">
+        <div class="value-card">
+          <div class="value-icon" style="background:var(--warm-bg)">
+            <svg viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+          </div>
+          <h3>Safety First</h3>
+          <p>Every vehicle is climate-controlled and GPS-monitored. Our handlers undergo rigorous training and background checks.</p>
+        </div>
+        <div class="value-card">
+          <div class="value-icon" style="background:rgba(45,139,95,0.1)">
+            <svg viewBox="0 0 24 24" fill="none" stroke="var(--secondary)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+          </div>
+          <h3>Full Transparency</h3>
+          <p>Live tracking, instant notifications, and detailed status updates keep you informed at every stage of the journey.</p>
+        </div>
+        <div class="value-card">
+          <div class="value-icon" style="background:rgba(59,130,246,0.1)">
+            <svg viewBox="0 0 24 24" fill="none" stroke="var(--info)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+          </div>
+          <h3>Compassionate Care</h3>
+          <p>We treat every pet as our own. Regular feeding, exercise breaks, and affection are standard on every journey.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- STATS -->
+  <section class="section">
+    <div class="container">
+      <div class="stats-row stagger-children">
+        <div class="stat-card">
+          <div class="stat-value counter" data-target="15000" data-suffix="+">0</div>
+          <div class="stat-label">Pets Delivered</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-value counter" data-target="50" data-suffix="+">0</div>
+          <div class="stat-label">States Covered</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-value counter" data-target="99" data-suffix="%">0</div>
+          <div class="stat-label">Safety Rate</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-value counter" data-target="24" data-suffix="/7">0</div>
+          <div class="stat-label">Support Available</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TEAM -->
+  <section class="section section-cream">
+    <div class="container">
+      <div class="section-header reveal">
+        <div class="section-label">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+          Our Team
+        </div>
+        <h2 class="section-title">Meet the Team</h2>
+        <p class="section-subtitle">A passionate team of animal lovers and logistics experts.</p>
+      </div>
+
+      <div class="team-grid stagger-children">
+        <div class="team-card">
+          <div class="team-avatar">DR</div>
+          <h4>David Richardson</h4>
+          <p>Founder &amp; CEO</p>
+        </div>
+        <div class="team-card">
+          <div class="team-avatar">EM</div>
+          <h4>Emily Martinez</h4>
+          <p>Head of Operations</p>
+        </div>
+        <div class="team-card">
+          <div class="team-avatar">JT</div>
+          <h4>James Thompson</h4>
+          <p>Lead Veterinarian</p>
+        </div>
+        <div class="team-card">
+          <div class="team-avatar">SC</div>
+          <h4>Sofia Chen</h4>
+          <p>Technology Director</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="cta-section">
+    <div class="container cta-content">
+      <h2>Ready to Ship Your Pet Safely?</h2>
+      <p>Get started with Pet Paws Journey today. Our team is standing by to help.</p>
+      <div style="display:flex;gap:16px;justify-content:center;flex-wrap:wrap">
+        <a href="contact.html" class="btn btn-white btn-lg">Contact Us</a>
+        <a href="track.html" class="btn btn-outline btn-lg" style="border-color:#fff;color:#fff">Track a Pet</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <a href="index.html" class="logo">
+            <svg viewBox="0 0 36 36" fill="currentColor" width="32" height="32"><ellipse cx="10" cy="8" rx="3.5" ry="4.5"/><ellipse cx="26" cy="8" rx="3.5" ry="4.5"/><ellipse cx="5" cy="19" rx="3" ry="3.5"/><ellipse cx="31" cy="19" rx="3" ry="3.5"/><path d="M18 34c-5 0-8-3.5-8-7.5 0-3 3.5-6 8-6s8 3 8 6c0 4-3 7.5-8 7.5z"/></svg>
+            Pet<span>Paws</span>
+          </a>
+          <p>Premium pet transport and tracking platform. Ensuring your beloved companions travel safely.</p>
+          <div class="footer-social">
+            <a href="#" aria-label="Facebook"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"/></svg></a>
+            <a href="#" aria-label="Twitter"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M23 3a10.9 10.9 0 01-3.14 1.53 4.48 4.48 0 00-7.86 3v1A10.66 10.66 0 013 4s-4 9 5 13a11.64 11.64 0 01-7 2c9 5 20 0 20-11.5a4.5 4.5 0 00-.08-.83A7.72 7.72 0 0023 3z"/></svg></a>
+            <a href="#" aria-label="Instagram"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg></a>
+          </div>
+        </div>
+        <div class="footer-column">
+          <h4>Quick Links</h4>
+          <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="about.html">About Us</a></li>
+            <li><a href="services.html">Services</a></li>
+            <li><a href="contact.html">Contact</a></li>
+          </ul>
+        </div>
+        <div class="footer-column">
+          <h4>Services</h4>
+          <ul>
+            <li><a href="services.html">Ground Transport</a></li>
+            <li><a href="services.html">Air Transport</a></li>
+            <li><a href="services.html">Live Tracking</a></li>
+          </ul>
+        </div>
+        <div class="footer-column">
+          <h4>Contact</h4>
+          <ul>
+            <li><a href="tel:+18005557387"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="14" height="14"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg> +1 (800) 555-7387</a></li>
+            <li><a href="mailto:info@petpawsjourney.com"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="14" height="14"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg> info@petpawsjourney.com</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>2026 Pet Paws Journey. All rights reserved.</p>
+        <div class="footer-bottom-links"><a href="#">Privacy Policy</a><a href="#">Terms of Service</a></div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="js/main.js"></script>
+
+  <!-- Floating WhatsApp Chat Button -->
+  <a href="https://wa.me/18005557387?text=Hi%20Pet%20Paws%20Journey!%20I'd%20like%20to%20inquire%20about%20pet%20transport%20services." target="_blank" rel="noopener noreferrer" class="floating-chat-btn" aria-label="Chat on WhatsApp">
+    <svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg"><path d="M16.004 0C7.164 0 0 7.163 0 16.004c0 2.825.736 5.584 2.137 8.012L.073 32l8.174-2.044A15.94 15.94 0 0016.004 32C24.84 32 32 24.837 32 16.004 32 7.163 24.84 0 16.004 0zm0 29.32a13.27 13.27 0 01-7.14-2.073l-.512-.304-5.31 1.327 1.394-5.095-.332-.529A13.28 13.28 0 012.68 16.004c0-7.35 5.978-13.324 13.324-13.324 7.35 0 13.316 5.974 13.316 13.324 0 7.35-5.966 13.316-13.316 13.316zm7.3-9.972c-.4-.2-2.366-1.168-2.732-1.3-.368-.134-.635-.2-.902.2-.268.4-1.035 1.3-1.27 1.57-.232.267-.467.3-.867.1-.4-.2-1.688-.622-3.216-1.984-1.188-1.06-1.99-2.37-2.223-2.77-.233-.4-.025-.616.175-.815.18-.18.4-.467.6-.7.2-.234.268-.4.4-.668.134-.268.067-.5-.033-.7-.1-.2-.902-2.172-1.235-2.974-.325-.78-.655-.674-.902-.687l-.77-.013c-.267 0-.7.1-1.067.5s-1.4 1.37-1.4 3.34c0 1.97 1.434 3.873 1.634 4.14.2.268 2.822 4.31 6.838 6.044.955.413 1.7.66 2.28.845.958.304 1.83.262 2.52.16.77-.116 2.367-.97 2.7-1.904.334-.935.334-1.737.234-1.903-.1-.168-.367-.268-.767-.468z"/></svg>
+  </a>
+  <div class="floating-chat-tooltip">Chat with us on WhatsApp</div>
+</body>
+</html>

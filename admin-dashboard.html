@@ -1,0 +1,506 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Pet Paws Journey Admin Dashboard — Manage shipments, tracking updates, and client communications.">
+  <title>Admin Dashboard — Pet Paws Journey</title>
+  <link rel="icon" type="image/png" href="favicon.png">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/dashboard.css">
+</head>
+<body>
+
+  <div class="dashboard">
+
+    <!-- ========== SIDEBAR ========== -->
+    <aside class="sidebar" id="sidebar">
+      <a href="index.html" class="sidebar-logo">
+        <svg viewBox="0 0 36 36" fill="currentColor"><ellipse cx="10" cy="8" rx="3.5" ry="4.5"/><ellipse cx="26" cy="8" rx="3.5" ry="4.5"/><ellipse cx="5" cy="19" rx="3" ry="3.5"/><ellipse cx="31" cy="19" rx="3" ry="3.5"/><path d="M18 34c-5 0-8-3.5-8-7.5 0-3 3.5-6 8-6s8 3 8 6c0 4-3 7.5-8 7.5z"/></svg>
+        Pet<span>Paws</span>
+      </a>
+
+      <nav class="sidebar-nav">
+        <!-- Overview -->
+        <button class="sidebar-nav-item active" data-panel="overview">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg>
+          Dashboard
+        </button>
+
+        <!-- Shipments -->
+        <button class="sidebar-nav-item" data-panel="shipments">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="16.5" y1="9.4" x2="7.5" y2="4.21"/><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/><polyline points="3.27,6.96 12,12.01 20.73,6.96"/><line x1="12" y1="22.08" x2="12" y2="12"/></svg>
+          Shipments
+        </button>
+
+        <!-- Create -->
+        <button class="sidebar-nav-item" data-panel="create">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="16"/><line x1="8" y1="12" x2="16" y2="12"/></svg>
+          Create Shipment
+        </button>
+
+        <!-- Messages -->
+        <button class="sidebar-nav-item" data-panel="messages">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+          Messages
+        </button>
+      </nav>
+
+      <div class="sidebar-divider"></div>
+
+      <div class="sidebar-footer">
+        <div class="sidebar-user">
+          <div class="sidebar-user-avatar">A</div>
+          <div>
+            <div class="sidebar-user-name">Admin</div>
+            <div class="sidebar-user-email">admin@email.com</div>
+          </div>
+        </div>
+        <button class="sidebar-logout" id="logoutBtn">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16,17 21,12 16,7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>
+          Logout
+        </button>
+      </div>
+    </aside>
+
+    <!-- Sidebar toggle (mobile) -->
+    <button class="sidebar-toggle" id="sidebarToggle">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+    </button>
+
+    <!-- ========== MAIN CONTENT ========== -->
+    <main class="dashboard-main">
+
+      <!-- Header -->
+      <div class="dashboard-header">
+        <div>
+          <h1>Dashboard Overview</h1>
+          <p>Welcome back! Here's what's happening with your shipments.</p>
+        </div>
+        <div class="dashboard-header-actions">
+          <button class="btn btn-primary btn-sm" onclick="switchPanel('create')">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="16"/><line x1="8" y1="12" x2="16" y2="12"/></svg>
+            New Shipment
+          </button>
+        </div>
+      </div>
+
+      <!-- Stats -->
+      <div class="stats-grid">
+        <div class="stat-card-dash">
+          <div class="stat-card-icon orange">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="16.5" y1="9.4" x2="7.5" y2="4.21"/><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/><polyline points="3.27,6.96 12,12.01 20.73,6.96"/><line x1="12" y1="22.08" x2="12" y2="12"/></svg>
+          </div>
+          <div>
+            <div class="stat-card-value" id="statTotal">0</div>
+            <div class="stat-card-label">Total Shipments</div>
+          </div>
+        </div>
+        <div class="stat-card-dash">
+          <div class="stat-card-icon blue">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="3" width="15" height="13"/><polygon points="16,8 20,8 23,11 23,16 16,16"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg>
+          </div>
+          <div>
+            <div class="stat-card-value" id="statTransit">0</div>
+            <div class="stat-card-label">In Transit</div>
+          </div>
+        </div>
+        <div class="stat-card-dash">
+          <div class="stat-card-icon green">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22,4 12,14.01 9,11.01"/></svg>
+          </div>
+          <div>
+            <div class="stat-card-value" id="statDelivered">0</div>
+            <div class="stat-card-label">Delivered</div>
+          </div>
+        </div>
+        <div class="stat-card-dash">
+          <div class="stat-card-icon purple">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12,6 12,12 16,14"/></svg>
+          </div>
+          <div>
+            <div class="stat-card-value" id="statPending">0</div>
+            <div class="stat-card-label">Pending</div>
+          </div>
+        </div>
+      </div>
+
+
+      <!-- ========== PANEL: OVERVIEW ========== -->
+      <div class="dashboard-panel active" id="panel-overview">
+        <div class="table-card">
+          <div class="table-card-header">
+            <h3>Recent Shipments</h3>
+            <button class="btn btn-sm btn-outline" onclick="switchPanel('shipments')">View All</button>
+          </div>
+          <table class="data-table">
+            <thead>
+              <tr>
+                <th>Tracking Code</th>
+                <th>Pet Name</th>
+                <th>Type</th>
+                <th>Client</th>
+                <th>Status</th>
+                <th>Created</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody id="recentShipmentsTable">
+              <tr><td colspan="7" style="text-align:center;padding:40px;color:var(--gray-400)">Loading...</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+
+      <!-- ========== PANEL: SHIPMENTS ========== -->
+      <div class="dashboard-panel" id="panel-shipments">
+        <div class="table-card">
+          <div class="table-card-header">
+            <h3>All Shipments</h3>
+            <div class="table-search">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+              <input type="text" id="shipmentSearch" placeholder="Search shipments...">
+            </div>
+          </div>
+          <table class="data-table">
+            <thead>
+              <tr>
+                <th>Tracking Code</th>
+                <th>Pet Name</th>
+                <th>Type</th>
+                <th>Client</th>
+                <th>Status</th>
+                <th>Created</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody id="allShipmentsTable">
+              <tr><td colspan="7" style="text-align:center;padding:40px;color:var(--gray-400)">Loading...</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+
+      <!-- ========== PANEL: CREATE SHIPMENT ========== -->
+      <div class="dashboard-panel" id="panel-create">
+        <form class="form-card" id="createShipmentForm">
+          <h3>Create New Shipment</h3>
+          <p>Fill in the details below to create a new pet transport shipment.</p>
+
+          <!-- Tracking Code -->
+          <div class="tracking-code-display">
+            <label>Tracking Code:</label>
+            <input type="text" id="trackingCodeInput" readonly>
+            <button type="button" class="btn btn-sm btn-outline" id="generateCodeBtn">Regenerate</button>
+          </div>
+
+          <!-- Client Details -->
+          <div class="form-section">
+            <div class="form-section-title">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/></svg>
+              Client Details
+            </div>
+            <div class="form-grid-3">
+              <div class="form-group">
+                <label for="clientName">Full Name *</label>
+                <input type="text" id="clientName" placeholder="John Smith" required>
+              </div>
+              <div class="form-group">
+                <label for="clientEmail">Email *</label>
+                <input type="email" id="clientEmail" placeholder="john@example.com" required>
+              </div>
+              <div class="form-group">
+                <label for="clientPhone">Phone</label>
+                <input type="tel" id="clientPhone" placeholder="+1 (555) 000-0000">
+              </div>
+            </div>
+          </div>
+
+          <!-- Shipper Details (auto-filled) -->
+          <div class="form-section">
+            <div class="form-section-title">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="3" width="15" height="13"/><polygon points="16,8 20,8 23,11 23,16 16,16"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg>
+              Shipper Details
+            </div>
+            <div class="form-grid-3">
+              <div class="form-group">
+                <label for="shipperName">Company Name</label>
+                <input type="text" id="shipperName" value="Pet Paws Journey Logistics">
+              </div>
+              <div class="form-group">
+                <label for="shipperEmail">Email</label>
+                <input type="email" id="shipperEmail" value="dispatch@petpawsjourney.com">
+              </div>
+              <div class="form-group">
+                <label for="shipperPhone">Phone</label>
+                <input type="tel" id="shipperPhone" value="+1 (800) 555-7387">
+              </div>
+            </div>
+          </div>
+
+          <!-- Pet Details -->
+          <div class="form-section">
+            <div class="form-section-title">
+              <svg viewBox="0 0 36 36" fill="currentColor" width="20" height="20"><ellipse cx="10" cy="8" rx="3.5" ry="4.5"/><ellipse cx="26" cy="8" rx="3.5" ry="4.5"/><ellipse cx="5" cy="19" rx="3" ry="3.5"/><ellipse cx="31" cy="19" rx="3" ry="3.5"/><path d="M18 34c-5 0-8-3.5-8-7.5 0-3 3.5-6 8-6s8 3 8 6c0 4-3 7.5-8 7.5z"/></svg>
+              Pet Details
+            </div>
+            <div class="form-grid-3">
+              <div class="form-group">
+                <label for="petName">Pet Name *</label>
+                <input type="text" id="petName" placeholder="Buddy" required>
+              </div>
+              <div class="form-group">
+                <label for="petType">Pet Type *</label>
+                <select id="petType" required>
+                  <option value="">Select type</option>
+                  <option value="Dog">Dog</option>
+                  <option value="Cat">Cat</option>
+                  <option value="Bird">Bird</option>
+                  <option value="Rabbit">Rabbit</option>
+                  <option value="Reptile">Reptile</option>
+                  <option value="Fish">Fish</option>
+                  <option value="Other">Other</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label for="petBreed">Breed</label>
+                <input type="text" id="petBreed" placeholder="Golden Retriever">
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="petImageUrl">Pet Image URL (optional)</label>
+              <input type="url" id="petImageUrl" placeholder="https://example.com/pet-photo.jpg">
+            </div>
+          </div>
+
+          <!-- Origin Location -->
+          <div class="form-section">
+            <div class="form-section-title">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+              Origin Location
+            </div>
+            <div class="form-group">
+              <label for="originAddress">Origin Address *</label>
+              <input type="text" id="originAddress" placeholder="Start typing an address..." required>
+            </div>
+            <div class="form-grid-2">
+              <div class="form-group">
+                <label for="originLat">Latitude</label>
+                <input type="text" id="originLat" placeholder="40.7128" readonly>
+              </div>
+              <div class="form-group">
+                <label for="originLng">Longitude</label>
+                <input type="text" id="originLng" placeholder="-74.0060" readonly>
+              </div>
+            </div>
+            <div class="map-picker" id="originMapPicker"></div>
+            <p class="map-picker-label">Click the map to set origin coordinates, or use the address autocomplete.</p>
+          </div>
+
+          <!-- Destination Location -->
+          <div class="form-section">
+            <div class="form-section-title">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+              Destination Location
+            </div>
+            <div class="form-group">
+              <label for="destAddress">Destination Address *</label>
+              <input type="text" id="destAddress" placeholder="Start typing an address..." required>
+            </div>
+            <div class="form-grid-2">
+              <div class="form-group">
+                <label for="destLat">Latitude</label>
+                <input type="text" id="destLat" placeholder="34.0522" readonly>
+              </div>
+              <div class="form-group">
+                <label for="destLng">Longitude</label>
+                <input type="text" id="destLng" placeholder="-118.2437" readonly>
+              </div>
+            </div>
+            <div class="map-picker" id="destMapPicker"></div>
+            <p class="map-picker-label">Click the map to set destination coordinates, or use the address autocomplete.</p>
+          </div>
+
+          <!-- Additional Details -->
+          <div class="form-section">
+            <div class="form-section-title">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
+              Additional Details
+            </div>
+            <div class="form-grid-2">
+              <div class="form-group">
+                <label for="estDelivery">Estimated Delivery</label>
+                <input type="date" id="estDelivery">
+              </div>
+              <div class="form-group">
+                <label>&nbsp;</label>
+                <p style="font-size:13px;color:var(--gray-400);padding-top:8px">Leave blank if unsure. Can be updated later.</p>
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="specialNotes">Special Notes</label>
+              <textarea id="specialNotes" placeholder="Any special instructions for handling, feeding schedules, medical needs..."></textarea>
+            </div>
+          </div>
+
+          <button type="submit" class="btn btn-primary btn-lg" style="width:100%">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22,4 12,14.01 9,11.01"/></svg>
+            Create Shipment
+          </button>
+        </form>
+      </div>
+
+
+      <!-- ========== PANEL: MESSAGES ========== -->
+      <div class="dashboard-panel" id="panel-messages">
+        <div class="messages-list" id="messagesList">
+          <div class="empty-state">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="64" height="64"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+            <h3>Loading messages...</h3>
+          </div>
+        </div>
+      </div>
+
+    </main>
+  </div>
+
+
+  <!-- ========== EDIT SHIPMENT MODAL ========== -->
+  <div class="modal-overlay" id="editModal">
+    <div class="modal">
+      <div class="modal-header">
+        <h3>Edit Shipment — <span id="editTrackingCode"></span></h3>
+        <button class="modal-close" onclick="closeModal('editModal')">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="form-grid-2">
+          <div class="form-group">
+            <label for="editClientName">Client Name</label>
+            <input type="text" id="editClientName">
+          </div>
+          <div class="form-group">
+            <label for="editClientEmail">Client Email</label>
+            <input type="email" id="editClientEmail">
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="editClientPhone">Client Phone</label>
+          <input type="tel" id="editClientPhone">
+        </div>
+        <div class="form-grid-2">
+          <div class="form-group">
+            <label for="editPetName">Pet Name</label>
+            <input type="text" id="editPetName">
+          </div>
+          <div class="form-group">
+            <label for="editPetType">Pet Type</label>
+            <select id="editPetType">
+              <option value="Dog">Dog</option>
+              <option value="Cat">Cat</option>
+              <option value="Bird">Bird</option>
+              <option value="Rabbit">Rabbit</option>
+              <option value="Reptile">Reptile</option>
+              <option value="Fish">Fish</option>
+              <option value="Other">Other</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="editPetBreed">Pet Breed</label>
+          <input type="text" id="editPetBreed">
+        </div>
+        <div class="form-group">
+          <label for="editPetImageUrl">Pet Image URL</label>
+          <input type="url" id="editPetImageUrl">
+        </div>
+        <div class="form-grid-2">
+          <div class="form-group">
+            <label for="editEstDelivery">Estimated Delivery</label>
+            <input type="date" id="editEstDelivery">
+          </div>
+          <div class="form-group">
+            <label for="editStatus">Status</label>
+            <select id="editStatus">
+              <option value="order_created">Order Created</option>
+              <option value="picked_up">Picked Up</option>
+              <option value="in_transit">In Transit</option>
+              <option value="out_for_delivery">Out for Delivery</option>
+              <option value="delivered">Delivered</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="editSpecialNotes">Special Notes</label>
+          <textarea id="editSpecialNotes"></textarea>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-sm" onclick="closeModal('editModal')" style="background:var(--gray-100);color:var(--gray-600)">Cancel</button>
+        <button class="btn btn-primary btn-sm" onclick="saveEditShipment()">Save Changes</button>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- ========== TRACKING UPDATE MODAL ========== -->
+  <div class="modal-overlay" id="updateModal">
+    <div class="modal">
+      <div class="modal-header">
+        <h3>Add Tracking Update — <span id="updateTrackingCode"></span></h3>
+        <button class="modal-close" onclick="closeModal('updateModal')">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="form-group">
+          <label for="updateStatus">Status *</label>
+          <select id="updateStatus">
+            <option value="order_created">Order Created</option>
+            <option value="picked_up">Picked Up</option>
+            <option value="in_transit" selected>In Transit</option>
+            <option value="out_for_delivery">Out for Delivery</option>
+            <option value="delivered">Delivered</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="updateLocation">Location Address</label>
+          <input type="text" id="updateLocation" placeholder="Current location of the pet">
+        </div>
+        <div class="form-grid-2">
+          <div class="form-group">
+            <label for="updateLat">Latitude</label>
+            <input type="text" id="updateLat" placeholder="40.7128" readonly>
+          </div>
+          <div class="form-group">
+            <label for="updateLng">Longitude</label>
+            <input type="text" id="updateLng" placeholder="-74.0060" readonly>
+          </div>
+        </div>
+        <div class="map-picker" id="updateMapPicker" style="height:250px"></div>
+        <p class="map-picker-label">Click the map to set coordinates for this tracking update.</p>
+        <div class="form-group" style="margin-top:16px">
+          <label for="updateDescription">Description</label>
+          <textarea id="updateDescription" placeholder="Describe the current status (e.g., Pet resting at checkpoint in Denver, CO)"></textarea>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-sm" onclick="closeModal('updateModal')" style="background:var(--gray-100);color:var(--gray-600)">Cancel</button>
+        <button class="btn btn-primary btn-sm" onclick="saveTrackingUpdate()">Add Update</button>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- Scripts -->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="js/supabase-config.js"></script>
+  <script src="js/main.js"></script>
+  <script src="js/admin.js"></script>
+  <!-- Google Maps loads async — only needed for map picker panels -->
+  <script async src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBpxYpVUtQlXjQgBCJNDvLkADlgTQ9IbLs&libraries=places"></script>
+</body>
+</html>

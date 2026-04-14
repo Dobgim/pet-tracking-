@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Track your pet in real-time with Pet Paws Journey. Enter your tracking code for live GPS location, status updates, and estimated arrival.">
+  <title>Track Your Pet — Pet Paws Journey</title>
+  <link rel="icon" type="image/png" href="favicon.png">
+  <link rel="stylesheet" href="css/style.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" defer></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js" defer></script>
+</head>
+<body>
+
+  <!-- HEADER -->
+  <header class="header" id="header">
+    <div class="container header-inner">
+      <a href="index.html" class="logo">
+        <svg viewBox="0 0 36 36" fill="currentColor"><ellipse cx="10" cy="8" rx="3.5" ry="4.5"/><ellipse cx="26" cy="8" rx="3.5" ry="4.5"/><ellipse cx="5" cy="19" rx="3" ry="3.5"/><ellipse cx="31" cy="19" rx="3" ry="3.5"/><path d="M18 34c-5 0-8-3.5-8-7.5 0-3 3.5-6 8-6s8 3 8 6c0 4-3 7.5-8 7.5z"/></svg>
+        Pet<span>Paws</span>
+      </a>
+      <nav class="nav-links" id="navLinks">
+        <a href="index.html">Home</a>
+        <a href="about.html">About</a>
+        <a href="services.html">Services</a>
+        <a href="contact.html">Contact</a>
+        <a href="track.html" class="active">Track Pet</a>
+      </nav>
+      <div class="nav-cta">
+        <a href="track.html" class="btn btn-primary btn-sm">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+          Track Now
+        </a>
+        <div class="mobile-toggle" id="mobileToggle"><span></span><span></span><span></span></div>
+      </div>
+    </div>
+  </header>
+
+  <!-- TRACK HERO -->
+  <section class="track-hero">
+    <div class="container">
+      <h1>Track Your Pet</h1>
+      <p>Enter your tracking code to see your pet's live location and journey status.</p>
+      <form class="track-search" id="trackSearchForm">
+        <input type="text" id="trackInput" placeholder="Enter tracking code (e.g. PPJ-A8X2K9M3)" required>
+        <button type="submit">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+          Track
+        </button>
+      </form>
+    </div>
+  </section>
+
+  <!-- LOADING STATE -->
+  <div class="track-loading" id="trackLoading">
+    <div class="container" style="text-align:center;padding:60px 0">
+      <div class="spinner"></div>
+      <p style="color:var(--gray-500);font-size:15px">Searching for your shipment...</p>
+    </div>
+  </div>
+
+  <!-- ERROR STATE -->
+  <div class="track-error" id="trackError">
+    <div class="container" style="text-align:center;padding:60px 0">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="64" height="64" style="color:var(--gray-300);margin-bottom:20px"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+      <h3 style="font-size:22px;font-weight:700;color:var(--dark);margin-bottom:8px">Shipment Not Found</h3>
+      <p style="font-size:15px;color:var(--gray-500);max-width:400px;margin:0 auto">
+        We could not find a shipment with that tracking code. Please double-check the code and try again.
+      </p>
+    </div>
+  </div>
+
+  <!-- TRACKING RESULTS -->
+  <section class="track-results" id="trackResults">
+    <div class="container">
+      <div class="track-layout">
+        <!-- Left: Pet info + Timeline -->
+        <div class="track-info-panel">
+          <!-- Pet Card -->
+          <div class="pet-card" id="petCard">
+            <!-- Populated by JS -->
+          </div>
+
+          <!-- Tracking Timeline -->
+          <div class="tracking-timeline" id="trackTimeline">
+            <!-- Populated by JS -->
+          </div>
+
+          <!-- Shipment Info -->
+          <div class="shipment-info-card" id="shipmentInfo">
+            <!-- Populated by JS -->
+          </div>
+        </div>
+
+        <!-- Right: Map -->
+        <div class="track-map-container">
+          <div id="trackMap"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <a href="index.html" class="logo"><svg viewBox="0 0 36 36" fill="currentColor" width="32" height="32"><ellipse cx="10" cy="8" rx="3.5" ry="4.5"/><ellipse cx="26" cy="8" rx="3.5" ry="4.5"/><ellipse cx="5" cy="19" rx="3" ry="3.5"/><ellipse cx="31" cy="19" rx="3" ry="3.5"/><path d="M18 34c-5 0-8-3.5-8-7.5 0-3 3.5-6 8-6s8 3 8 6c0 4-3 7.5-8 7.5z"/></svg>Pet<span>Paws</span></a>
+          <p>Premium pet transport and tracking platform.</p>
+        </div>
+        <div class="footer-column"><h4>Quick Links</h4><ul><li><a href="index.html">Home</a></li><li><a href="about.html">About Us</a></li><li><a href="services.html">Services</a></li><li><a href="contact.html">Contact</a></li></ul></div>
+        <div class="footer-column"><h4>Services</h4><ul><li><a href="services.html">Ground Transport</a></li><li><a href="services.html">Air Transport</a></li><li><a href="services.html">Live Tracking</a></li></ul></div>
+        <div class="footer-column"><h4>Contact</h4><ul><li><a href="tel:+18005557387">+1 (800) 555-7387</a></li><li><a href="mailto:info@petpawsjourney.com">info@petpawsjourney.com</a></li></ul></div>
+      </div>
+      <div class="footer-bottom">
+        <p>2026 Pet Paws Journey. All rights reserved.</p>
+        <div class="footer-bottom-links"><a href="#">Privacy Policy</a><a href="#">Terms of Service</a></div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Supabase (must load before app scripts) -->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="js/supabase-config.js"></script>
+  <script src="js/main.js"></script>
+  <script src="js/track.js"></script>
+  <!-- Google Maps API — loads async, only needed for map rendering -->
+  <!-- Replace AIzaSyBpxYpVUtQlXjQgBCJNDvLkADlgTQ9IbLs with your actual key -->
+  <script async src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBpxYpVUtQlXjQgBCJNDvLkADlgTQ9IbLs&libraries=places"></script>
+
+  <!-- Floating WhatsApp Chat Button -->
+  <a href="https://wa.me/18005557387?text=Hi%20Pet%20Paws%20Journey!%20I'd%20like%20to%20inquire%20about%20pet%20transport%20services." target="_blank" rel="noopener noreferrer" class="floating-chat-btn" aria-label="Chat on WhatsApp">
+    <svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg"><path d="M16.004 0C7.164 0 0 7.163 0 16.004c0 2.825.736 5.584 2.137 8.012L.073 32l8.174-2.044A15.94 15.94 0 0016.004 32C24.84 32 32 24.837 32 16.004 32 7.163 24.84 0 16.004 0zm0 29.32a13.27 13.27 0 01-7.14-2.073l-.512-.304-5.31 1.327 1.394-5.095-.332-.529A13.28 13.28 0 012.68 16.004c0-7.35 5.978-13.324 13.324-13.324 7.35 0 13.316 5.974 13.316 13.324 0 7.35-5.966 13.316-13.316 13.316zm7.3-9.972c-.4-.2-2.366-1.168-2.732-1.3-.368-.134-.635-.2-.902.2-.268.4-1.035 1.3-1.27 1.57-.232.267-.467.3-.867.1-.4-.2-1.688-.622-3.216-1.984-1.188-1.06-1.99-2.37-2.223-2.77-.233-.4-.025-.616.175-.815.18-.18.4-.467.6-.7.2-.234.268-.4.4-.668.134-.268.067-.5-.033-.7-.1-.2-.902-2.172-1.235-2.974-.325-.78-.655-.674-.902-.687l-.77-.013c-.267 0-.7.1-1.067.5s-1.4 1.37-1.4 3.34c0 1.97 1.434 3.873 1.634 4.14.2.268 2.822 4.31 6.838 6.044.955.413 1.7.66 2.28.845.958.304 1.83.262 2.52.16.77-.116 2.367-.97 2.7-1.904.334-.935.334-1.737.234-1.903-.1-.168-.367-.268-.767-.468z"/></svg>
+  </a>
+  <div class="floating-chat-tooltip">Chat with us on WhatsApp</div>
+</body>
+</html>
