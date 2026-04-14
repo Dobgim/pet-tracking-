@@ -279,17 +279,32 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const widget = document.createElement('div');
     widget.className = 'global-reach-widget';
+    
+    // Using high-quality CDN SVG flags to avoid OS emoji inconsistencies
+    const getFlag = (code) => `<img src="https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/4.1.4/flags/1x1/${code}.svg" alt="${code}" style="width: 100%; height: 100%; border-radius: 50%; object-fit: cover; border: 1px solid rgba(0,0,0,0.05);">`;
+
+    // A detailed, professional layered SVG globe
+    const professionalGlobe = `
+      <svg viewBox="0 0 100 100" fill="none" style="width: 36px; height: 36px;">
+        <circle cx="50" cy="50" r="48" fill="#ffffff" opacity="0.15"/>
+        <path d="M50 2A48 48 0 1 0 50 98A48 48 0 1 0 50 2ZM50 10A40 40 0 1 1 50 90A40 40 0 1 1 50 10Z" fill="currentColor"/>
+        <path d="M10 50A40 40 0 0 0 90 50A40 40 0 0 0 10 50Z" stroke="currentColor" stroke-width="4"/>
+        <path d="M50 10C65 10 75 28 75 50C75 72 65 90 50 90C35 90 25 72 25 50C25 28 35 10 50 10Z" stroke="currentColor" stroke-width="4"/>
+        <path d="M22 28L78 28M22 72L78 72" stroke="currentColor" stroke-width="4" stroke-linecap="round"/>
+      </svg>
+    `;
+
     widget.innerHTML = `
       <div class="global-orbit">
-        <div class="global-orbit-item"><div class="global-orbit-inner">🇺🇸</div></div>
-        <div class="global-orbit-item"><div class="global-orbit-inner">🇬🇧</div></div>
-        <div class="global-orbit-item"><div class="global-orbit-inner">🇨🇦</div></div>
-        <div class="global-orbit-item"><div class="global-orbit-inner">🇦🇺</div></div>
-        <div class="global-orbit-item"><div class="global-orbit-inner">🇪🇺</div></div>
-        <div class="global-orbit-item"><div class="global-orbit-inner">🇧🇷</div></div>
+        <div class="global-orbit-item" title="United States"><div class="global-orbit-inner">${getFlag('us')}</div></div>
+        <div class="global-orbit-item" title="United Kingdom"><div class="global-orbit-inner">${getFlag('gb')}</div></div>
+        <div class="global-orbit-item" title="Canada"><div class="global-orbit-inner">${getFlag('ca')}</div></div>
+        <div class="global-orbit-item" title="Australia"><div class="global-orbit-inner">${getFlag('au')}</div></div>
+        <div class="global-orbit-item" title="European Union"><div class="global-orbit-inner">${getFlag('eu')}</div></div>
+        <div class="global-orbit-item" title="Brazil"><div class="global-orbit-inner">${getFlag('br')}</div></div>
       </div>
       <div class="global-reach-globe" title="Worldwide Pet Transport">
-        ${SVG_ICONS.globe}
+        ${professionalGlobe}
       </div>
     `;
     

@@ -50,3 +50,29 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   });
 });
+
+// ---- Contact Google Map ----
+window.initContactMap = function() {
+  const mapEl = document.getElementById('contactMap');
+  if (!mapEl) return;
+  
+  const officeLocation = { lat: 40.7484, lng: -73.9857 }; // Empire State / New York Area
+
+  const map = new google.maps.Map(mapEl, {
+    center: officeLocation,
+    zoom: 15,
+    mapTypeControl: false,
+    streetViewControl: false,
+    styles: [
+      { featureType: 'poi', elementType: 'labels', stylers: [{ visibility: 'off' }] },
+      { featureType: 'transit', stylers: [{ visibility: 'off' }] }
+    ]
+  });
+
+  new google.maps.Marker({
+    position: officeLocation,
+    map: map,
+    title: 'Pet Paws Journey Office',
+    animation: google.maps.Animation.DROP
+  });
+};

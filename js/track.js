@@ -207,35 +207,51 @@ function renderTimeline(shipment, updates) {
 }
 
 // ---- Google Maps Integration ----
-function initTrackingMap(shipment, updates) {
-  // Requires Google Maps JS API to be loaded
+function initTrackingMap(shipment, updates, retryCount = 0) {
+  // Wait for Google Maps API to load if not ready yet (handle fast async race condition)
   if (typeof google === 'undefined' || !google.maps) {
+    if (retryCount < 10) { // Try for up to 5 seconds
+      setTimeout(() => initTrackingMap(shipment, updates, retryCount + 1), 500);
+      return;
+    }
     console.warn('Google Maps API not loaded.');
-    document.getElementById('trackMap').innerHTML = `
+    document.getElementById('trackMap').innerHTML = \`
       <div style="display:flex;align-items:center;justify-content:center;height:100%;background:var(--gray-100);flex-direction:column;gap:16px;padding:40px">
-        ${SVG_ICONS.mapPin}
+        \${SVG_ICONS.mapPin}
         <p style="color:var(--gray-500);font-size:14px;text-align:center">Map requires a Google Maps API key.<br>Contact admin to enable live tracking.</p>
-      </div>`;
+      </div>\`;
     return;
   }
 
-  const origin = { lat: shipment.origin_lat, lng: shipment.origin_lng };
-  const destination = { lat: shipment.destination_lat, lng: shipment.destination_lng };
+  // Provide robust fallbacks if admin didn't select exact map coordinates (e.g. valid default route)
+  const defaultOrigin = { lat: 40.7128, lng: -74.0060 }; // New York fallback
+  const defaultDest = { lat: 34.0522, lng: -118.2437 }; // LA fallback
+
+  const origin = { 
+    lat: Number(shipment.origin_lat) || defaultOrigin.lat, 
+    lng: Number(shipment.origin_lng) || defaultOrigin.lng 
+  };
+  const destination = { 
+    lat: Number(shipment.destination_lat) || defaultDest.lat, 
+    lng: Number(shipment.destination_lng) || defaultDest.lng 
+  };
 
   // Build route points from updates
   const routePoints = [origin];
-  updates.forEach(u => {
-    if (u.lat && u.lng) {
-      routePoints.push({ lat: u.lat, lng: u.lng });
-    }
-  });
+  if (updates && updates.length > 0) {
+    updates.forEach(u => {
+      if (u.lat && u.lng) {
+        routePoints.push({ lat: Number(u.lat), lng: Number(u.lng) });
+      }
+    });
+  }
   if (shipment.current_status === 'delivered') {
     routePoints.push(destination);
   }
 
   // Current position (last known)
   const currentPos = shipment.current_lat && shipment.current_lng
-    ? { lat: shipment.current_lat, lng: shipment.current_lng }
+    ? { lat: Number(shipment.current_lat), lng: Number(shipment.current_lng) }
     : routePoints[routePoints.length - 1];
 
   // Initialize map
