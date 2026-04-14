@@ -560,6 +560,105 @@ input, textarea, select {
   50% { box-shadow: 0 4px 28px rgba(37, 211, 102, 0.65); }
 }
 
+/* ---- Global Reach Animation Widget ---- */
+.global-reach-widget {
+  position: fixed;
+  bottom: 28px;
+  left: 28px;
+  z-index: 9998;
+  width: 60px;
+  height: 60px;
+  pointer-events: none;
+}
+
+.global-reach-globe {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 20px rgba(232, 119, 58, 0.4);
+  position: relative;
+  z-index: 2;
+  pointer-events: auto;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+}
+
+.global-reach-globe:hover {
+  transform: scale(1.1);
+}
+
+.global-reach-globe svg {
+  width: 32px;
+  height: 32px;
+  animation: spinSlow 15s linear infinite;
+}
+
+.global-orbit {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 180px;
+  height: 180px;
+  margin-top: -90px;
+  margin-left: -90px;
+  border-radius: 50%;
+  border: 1px dashed rgba(232, 119, 58, 0.25);
+  animation: orbitSpin 20s linear infinite;
+  z-index: 1;
+}
+
+.global-orbit-item {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  margin-left: -16px;
+  margin-top: -16px;
+  width: 32px;
+  height: 32px;
+  background: var(--white);
+  border-radius: 50%;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+  line-height: 1;
+}
+
+.global-orbit-item:nth-child(1) { transform: rotate(0deg) translateY(-90px); }
+.global-orbit-item:nth-child(2) { transform: rotate(60deg) translateY(-90px); }
+.global-orbit-item:nth-child(3) { transform: rotate(120deg) translateY(-90px); }
+.global-orbit-item:nth-child(4) { transform: rotate(180deg) translateY(-90px); }
+.global-orbit-item:nth-child(5) { transform: rotate(240deg) translateY(-90px); }
+.global-orbit-item:nth-child(6) { transform: rotate(300deg) translateY(-90px); }
+
+.global-orbit-inner {
+  animation: counterOrbitSpin 20s linear infinite;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+@keyframes spinSlow {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+@keyframes orbitSpin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+@keyframes counterOrbitSpin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(-360deg); }
+}
+
 .hero-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;

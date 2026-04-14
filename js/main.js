@@ -271,3 +271,30 @@ function getStatusLabel(status) {
 function getStatusClass(status) {
   return (status || '').replace(/_/g, '-');
 }
+
+// ---- Inject Global Reach Widget ----
+document.addEventListener('DOMContentLoaded', () => {
+  const injectGlobalReachWidget = () => {
+    if (document.querySelector('.global-reach-widget')) return;
+
+    const widget = document.createElement('div');
+    widget.className = 'global-reach-widget';
+    widget.innerHTML = `
+      <div class="global-orbit">
+        <div class="global-orbit-item"><div class="global-orbit-inner">🇺🇸</div></div>
+        <div class="global-orbit-item"><div class="global-orbit-inner">🇬🇧</div></div>
+        <div class="global-orbit-item"><div class="global-orbit-inner">🇨🇦</div></div>
+        <div class="global-orbit-item"><div class="global-orbit-inner">🇦🇺</div></div>
+        <div class="global-orbit-item"><div class="global-orbit-inner">🇪🇺</div></div>
+        <div class="global-orbit-item"><div class="global-orbit-inner">🇧🇷</div></div>
+      </div>
+      <div class="global-reach-globe" title="Worldwide Pet Transport">
+        ${SVG_ICONS.globe}
+      </div>
+    `;
+    
+    document.body.appendChild(widget);
+  };
+
+  injectGlobalReachWidget();
+});
