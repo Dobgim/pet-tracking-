@@ -668,7 +668,12 @@ function subscribeToRealtime(shipment) {
               lng: Number(currentShipment.current_lng)
             });
             if (totalDist > 0) {
-              animationProgress = Math.min(covered / totalDist, 0.99);
+              const dbProgress = Math.min(covered / totalDist, 0.99);
+              // Only overwrite if the database says it's genuinely progressed beyond the origin, 
+              // otherwise let the current animationProgress (freeze frame) persist.
+              if (dbProgress > 0) {
+                animationProgress = dbProgress;
+              }
             }
           }
 
