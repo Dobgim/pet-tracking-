@@ -231,11 +231,11 @@
               </div>
               <div class="form-group">
                 <label for="shipperEmail">Email</label>
-                <input type="email" id="shipperEmail" value="dispatch@petpawsjourney.com">
+                <input type="email" id="shipperEmail" value="petpawsjourney@gmail.com">
               </div>
               <div class="form-group">
                 <label for="shipperPhone">Phone</label>
-                <input type="tel" id="shipperPhone" value="+1 (800) 555-7387">
+                <input type="tel" id="shipperPhone" value="+1 (470) 494-2387">
               </div>
             </div>
           </div>
@@ -321,6 +321,48 @@
             </div>
             <div class="map-picker" id="destMapPicker"></div>
             <p class="map-picker-label">Click the map to set destination coordinates, or use the address autocomplete.</p>
+          </div>
+
+          <!-- Shipment Status & Packaging -->
+          <div class="form-section">
+            <div class="form-section-title">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="3" width="15" height="13"/><polygon points="16,8 20,8 23,11 23,16 16,16"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg>
+              Shipment Status & Packaging
+            </div>
+            <div class="form-grid-3">
+              <div class="form-group">
+                <label for="shipmentStatus">Initial Status *</label>
+                <select id="shipmentStatus" required>
+                  <option value="pending">Pending</option>
+                  <option value="order_created">Order Created</option>
+                  <option value="picked_up">Picked Up</option>
+                  <option value="in_transit">In Transit</option>
+                  <option value="out_for_delivery">Out for Delivery</option>
+                  <option value="on_hold">On Hold</option>
+                  <option value="delivered">Delivered</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label for="packagingType">Packaging Type *</label>
+                <select id="packagingType" required>
+                  <option value="">Select packaging</option>
+                  <option value="Pet Crate">Pet Crate</option>
+                  <option value="Travel Kennel">Travel Kennel</option>
+                  <option value="Pet Carrier">Pet Carrier</option>
+                  <option value="Cardboard Carton">Cardboard Carton</option>
+                  <option value="Wire Cage">Wire Cage</option>
+                  <option value="Soft-Sided Carrier">Soft-Sided Carrier</option>
+                  <option value="Airline Approved Crate">Airline Approved Crate</option>
+                  <option value="Custom Enclosure">Custom Enclosure</option>
+                  <option value="Open Tray">Open Tray</option>
+                  <option value="Other">Other</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label for="packageWeight">Package Weight (kg)</label>
+                <input type="number" id="packageWeight" placeholder="e.g. 12" min="0" step="0.1">
+              </div>
+            </div>
           </div>
 
           <!-- Additional Details -->
@@ -425,12 +467,35 @@
           <div class="form-group">
             <label for="editStatus">Status</label>
             <select id="editStatus">
+              <option value="pending">Pending</option>
               <option value="order_created">Order Created</option>
               <option value="picked_up">Picked Up</option>
               <option value="in_transit">In Transit</option>
               <option value="out_for_delivery">Out for Delivery</option>
+              <option value="on_hold">On Hold</option>
               <option value="delivered">Delivered</option>
             </select>
+          </div>
+        </div>
+        <div class="form-grid-2">
+          <div class="form-group">
+            <label for="editPackagingType">Packaging Type</label>
+            <select id="editPackagingType">
+              <option value="Pet Crate">Pet Crate</option>
+              <option value="Travel Kennel">Travel Kennel</option>
+              <option value="Pet Carrier">Pet Carrier</option>
+              <option value="Cardboard Carton">Cardboard Carton</option>
+              <option value="Wire Cage">Wire Cage</option>
+              <option value="Soft-Sided Carrier">Soft-Sided Carrier</option>
+              <option value="Airline Approved Crate">Airline Approved Crate</option>
+              <option value="Custom Enclosure">Custom Enclosure</option>
+              <option value="Open Tray">Open Tray</option>
+              <option value="Other">Other</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="editPackageWeight">Weight (kg)</label>
+            <input type="number" id="editPackageWeight" min="0" step="0.1">
           </div>
         </div>
         <div class="form-group">
@@ -459,10 +524,12 @@
         <div class="form-group">
           <label for="updateStatus">Status *</label>
           <select id="updateStatus">
+            <option value="pending">Pending</option>
             <option value="order_created">Order Created</option>
             <option value="picked_up">Picked Up</option>
             <option value="in_transit" selected>In Transit</option>
             <option value="out_for_delivery">Out for Delivery</option>
+            <option value="on_hold">On Hold</option>
             <option value="delivered">Delivered</option>
           </select>
         </div>
@@ -496,6 +563,7 @@
 
 
   <!-- Scripts -->
+  <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
   <script src="js/supabase-config.js"></script>
   <script src="js/main.js"></script>

@@ -3,8 +3,8 @@
    Pet Paws Journey — Pet Transport Tracking
    ============================================ */
 
-const SUPABASE_URL = 'https://blitracqgaggxuypqbpo.supabase.co';
-const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImJsaXRyYWNxZ2FnZ3h1eXBxYnBvIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzM5ODU1MjgsImV4cCI6MjA4OTU2MTUyOH0.vAwSRoqGk-nL0BfnXL6-rSSM6MQS6dWcoghLimdVIVs';
+const SUPABASE_URL = 'https://ykskxipkqlkcuxaooxvc.supabase.co';
+const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Inlrc2t4aXBrcWxrY3V4YW9veHZjIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzYyNzcxNzAsImV4cCI6MjA5MTg1MzE3MH0.BxP1AnGakpZoNtfUKbWWX0YHVO8-2enodB2k7JOscBI';
 
 // Initialize the Supabase client
 // The CDN exposes createClient on window.supabase

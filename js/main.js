@@ -256,12 +256,13 @@ function generateTrackingCode() {
   return code;
 }
 
-// ---- Utility: Status label mapping ----
 function getStatusLabel(status) {
   const labels = {
+    'pending': 'Pending',
     'order_created': 'Order Created',
     'picked_up': 'Picked Up',
     'in_transit': 'In Transit',
+    'on_hold': 'On Hold',
     'out_for_delivery': 'Out for Delivery',
     'delivered': 'Delivered'
   };

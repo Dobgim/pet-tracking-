@@ -73,11 +73,19 @@
   <!-- TRACKING RESULTS -->
   <section class="track-results" id="trackResults">
     <div class="container">
+
+      <!-- Live Status Banner -->
+      <div class="live-status-banner" id="liveStatusBanner">
+        <div class="live-dot"></div>
+        <span id="liveStatusText">Live Tracking Active</span>
+      </div>
+
       <div class="track-layout">
-        <!-- Left: Pet info + Timeline -->
+        <!-- Left: Invoice + Timeline -->
         <div class="track-info-panel">
-          <!-- Pet Card -->
-          <div class="pet-card" id="petCard">
+
+          <!-- Professional Invoice Receipt -->
+          <div class="invoice-receipt" id="invoiceReceipt">
             <!-- Populated by JS -->
           </div>
 
@@ -86,15 +94,19 @@
             <!-- Populated by JS -->
           </div>
 
-          <!-- Shipment Info -->
-          <div class="shipment-info-card" id="shipmentInfo">
-            <!-- Populated by JS -->
-          </div>
         </div>
 
-        <!-- Right: Map -->
+        <!-- Right: Live Map -->
         <div class="track-map-container">
+          <div class="map-legend" id="mapLegend">
+            <div class="legend-item"><span class="legend-dot origin"></span> Origin</div>
+            <div class="legend-item"><span class="legend-dot destination"></span> Destination</div>
+            <div class="legend-item"><span class="legend-dot pet"></span> Pet Location</div>
+          </div>
           <div id="trackMap"></div>
+          <div class="map-status-bar" id="mapStatusBar">
+            <span id="mapStatusText">📍 Locating your pet...</span>
+          </div>
         </div>
       </div>
     </div>
@@ -110,7 +122,7 @@
         </div>
         <div class="footer-column"><h4>Quick Links</h4><ul><li><a href="index.html">Home</a></li><li><a href="about.html">About Us</a></li><li><a href="services.html">Services</a></li><li><a href="contact.html">Contact</a></li></ul></div>
         <div class="footer-column"><h4>Services</h4><ul><li><a href="services.html">Ground Transport</a></li><li><a href="services.html">Air Transport</a></li><li><a href="services.html">Live Tracking</a></li></ul></div>
-        <div class="footer-column"><h4>Contact</h4><ul><li><a href="tel:+18005557387">+1 (800) 555-7387</a></li><li><a href="mailto:info@petpawsjourney.com">info@petpawsjourney.com</a></li></ul></div>
+        <div class="footer-column"><h4>Contact</h4><ul><li><a href="https://wa.me/14704942387" target="_blank">+1 (470) 494-2387</a></li><li><a href="mailto:petpawsjourney@gmail.com">petpawsjourney@gmail.com</a></li></ul></div>
       </div>
       <div class="footer-bottom">
         <p>2026 Pet Paws Journey. All rights reserved.</p>

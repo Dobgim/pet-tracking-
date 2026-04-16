@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Setup — Pet Paws Journey</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: #0f172a;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .card {
+      background: #1e293b;
+      border: 1px solid #334155;
+      border-radius: 16px;
+      padding: 48px 40px;
+      width: 100%;
+      max-width: 460px;
+      text-align: center;
+      box-shadow: 0 25px 50px rgba(0,0,0,0.4);
+    }
+    .logo {
+      font-size: 28px;
+      font-weight: 700;
+      color: #f1f5f9;
+      margin-bottom: 8px;
+    }
+    .logo span { color: #e8773a; }
+    .subtitle { color: #94a3b8; font-size: 14px; margin-bottom: 32px; }
+    .status-box {
+      border-radius: 12px;
+      padding: 24px;
+      margin: 24px 0;
+      font-size: 15px;
+      font-weight: 500;
+    }
+    .status-box.loading { background: #1e3a5f; border: 1px solid #3b82f6; color: #93c5fd; }
+    .status-box.success { background: #14532d; border: 1px solid #22c55e; color: #86efac; }
+    .status-box.error   { background: #450a0a; border: 1px solid #ef4444; color: #fca5a5; }
+    .credentials {
+      background: #0f172a;
+      border: 1px solid #334155;
+      border-radius: 10px;
+      padding: 20px;
+      margin: 20px 0;
+      text-align: left;
+    }
+    .credentials h3 { color: #e8773a; font-size: 13px; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 14px; }
+    .cred-row { display: flex; justify-content: space-between; align-items: center; padding: 8px 0; border-bottom: 1px solid #1e293b; }
+    .cred-row:last-child { border-bottom: none; }
+    .cred-label { color: #64748b; font-size: 13px; }
+    .cred-value { color: #f1f5f9; font-size: 14px; font-family: monospace; font-weight: 600; }
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: #e8773a;
+      color: #fff;
+      border: none;
+      border-radius: 10px;
+      padding: 14px 28px;
+      font-size: 15px;
+      font-weight: 600;
+      cursor: pointer;
+      text-decoration: none;
+      margin-top: 8px;
+      transition: background 0.2s;
+    }
+    .btn:hover { background: #d4652a; }
+    .warning {
+      background: #422006;
+      border: 1px solid #f97316;
+      border-radius: 8px;
+      padding: 12px 16px;
+      color: #fdba74;
+      font-size: 12px;
+      margin-top: 16px;
+      text-align: left;
+    }
+    .spinner {
+      width: 20px; height: 20px;
+      border: 3px solid #3b82f6;
+      border-top-color: transparent;
+      border-radius: 50%;
+      animation: spin 0.8s linear infinite;
+      margin: 0 auto 12px;
+    }
+    @keyframes spin { to { transform: rotate(360deg); } }
+  </style>
+</head>
+<body>
+
+  <div class="card">
+    <div class="logo">Pet<span>Paws</span> Journey</div>
+    <div class="subtitle">One-Time Admin Account Setup</div>
+
+    <div class="credentials">
+      <h3>Your Admin Credentials</h3>
+      <div class="cred-row">
+        <span class="cred-label">Email</span>
+        <span class="cred-value">admin@petpawsjourney.com</span>
+      </div>
+      <div class="cred-row">
+        <span class="cred-label">Password</span>
+        <span class="cred-value">PetPaws@Admin2026!</span>
+      </div>
+    </div>
+
+    <div class="status-box loading" id="statusBox">
+      <div class="spinner"></div>
+      Creating your admin account in Supabase...
+    </div>
+
+    <div id="actionArea" style="display:none;"></div>
+
+    <div class="warning">
+      ⚠️ <strong>Delete this file</strong> after logging in successfully — it contains your credentials.
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="js/supabase-config.js"></script>
+  <script>
+    const ADMIN_EMAIL    = 'admin@petpawsjourney.com';
+    const ADMIN_PASSWORD = 'PetPaws@Admin2026!';
+
+    async function createAdmin() {
+      const statusBox  = document.getElementById('statusBox');
+      const actionArea = document.getElementById('actionArea');
+
+      try {
+        const { data, error } = await supabaseClient.auth.signUp({
+          email:    ADMIN_EMAIL,
+          password: ADMIN_PASSWORD,
+          options: {
+            data: { full_name: 'Admin' }
+          }
+        });
+
+        // If user already exists, Supabase returns a user object without error
+        if (error) {
+          // "User already registered" is not a fatal error
+          if (error.message && error.message.toLowerCase().includes('already registered')) {
+            statusBox.className = 'status-box success';
+            statusBox.innerHTML = '✅ Admin account already exists! You can log in now.';
+          } else {
+            throw error;
+          }
+        } else {
+          statusBox.className = 'status-box success';
+          statusBox.innerHTML = '✅ Admin account created successfully! Click below to go to the login page.';
+        }
+
+        actionArea.style.display = 'block';
+        actionArea.innerHTML = `<a href="admin-login.html" class="btn">🔑 Go to Admin Login</a>`;
+
+      } catch (err) {
+        statusBox.className = 'status-box error';
+        statusBox.innerHTML = `❌ Error: ${err.message || 'Something went wrong.'}`;
+        actionArea.style.display = 'block';
+        actionArea.innerHTML = `<a href="admin-login.html" class="btn" style="background:#475569;">Try logging in anyway →</a>`;
+      }
+    }
+
+    // Run on page load
+    window.addEventListener('load', createAdmin);
+  </script>
+</body>
+</html>

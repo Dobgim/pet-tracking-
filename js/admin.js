@@ -1,7 +1,14 @@
 /* ============================================
    PET PAWS JOURNEY — ADMIN DASHBOARD
    Auth, CRUD for shipments, tracking updates
+   + EmailJS notifications to client & admin
    ============================================ */
+
+// ---- EmailJS Configuration ----
+const EMAILJS_PUBLIC_KEY  = 'XXxDKJxYUGQBuhP2w';
+const EMAILJS_SERVICE_ID  = 'service_whqk61h';
+const EMAILJS_TEMPLATE_ID = 'template_3o1p4qm';
+const ADMIN_EMAIL = 'petpawsjourney@gmail.com';
 
 let currentPanel = 'overview';
 let shipments = [];
@@ -10,6 +17,11 @@ let originMapPicker = null, destMapPicker = null;
 let originPickerMarker = null, destPickerMarker = null;
 
 document.addEventListener('DOMContentLoaded', async () => {
+  // Initialize EmailJS
+  if (typeof emailjs !== 'undefined') {
+    emailjs.init(EMAILJS_PUBLIC_KEY);
+  }
+
   // Check authentication
   const { data: { session } } = await supabaseClient.auth.getSession();
   if (!session) {
@@ -232,7 +244,10 @@ async function handleCreateShipment(e) {
     current_lat: parseFloat(document.getElementById('originLat').value) || null,
     current_lng: parseFloat(document.getElementById('originLng').value) || null,
     estimated_delivery: document.getElementById('estDelivery').value || null,
-    special_notes: document.getElementById('specialNotes').value.trim() || null
+    special_notes: document.getElementById('specialNotes').value.trim() || null,
+    current_status: document.getElementById('shipmentStatus').value,
+    packaging_type: document.getElementById('packagingType').value,
+    package_weight: parseFloat(document.getElementById('packageWeight').value) || null
   };
 
   // Validate required fields
@@ -267,6 +282,10 @@ async function handleCreateShipment(e) {
       }]);
 
     showToast(`Shipment created! Code: ${data.tracking_code}`, 'success');
+
+    // Send email notifications to BOTH client and admin
+    await notifyShipmentCreated(shipmentData);
+
     form.reset();
     document.getElementById('trackingCodeInput').value = generateTrackingCode();
     
@@ -301,6 +320,8 @@ async function editShipment(id) {
   document.getElementById('editEstDelivery').value = shipment.estimated_delivery ? shipment.estimated_delivery.split('T')[0] : '';
   document.getElementById('editSpecialNotes').value = shipment.special_notes || '';
   document.getElementById('editStatus').value = shipment.current_status;
+  document.getElementById('editPackagingType').value = shipment.packaging_type || '';
+  document.getElementById('editPackageWeight').value = shipment.package_weight || '';
   document.getElementById('editTrackingCode').textContent = shipment.tracking_code;
 
   modal.classList.add('visible');
@@ -321,16 +342,26 @@ async function saveEditShipment() {
     estimated_delivery: document.getElementById('editEstDelivery').value || null,
     special_notes: document.getElementById('editSpecialNotes').value.trim() || null,
     current_status: document.getElementById('editStatus').value,
+    packaging_type: document.getElementById('editPackagingType').value,
+    package_weight: parseFloat(document.getElementById('editPackageWeight').value) || null,
     updated_at: new Date().toISOString()
   };
 
   try {
+    const shipment = shipments.find(s => s.id === editingShipmentId);
+    const oldStatus = shipment ? shipment.current_status : null;
+
     const { error } = await supabaseClient
       .from('pet_shipments')
       .update(updateData)
       .eq('id', editingShipmentId);
 
     if (error) throw error;
+
+    // If the status changed, notify client & admin
+    if (shipment && oldStatus !== updateData.current_status) {
+      await notifyStatusChanged(shipment, updateData.current_status);
+    }
 
     showToast('Shipment updated successfully.', 'success');
     closeModal('editModal');
@@ -416,6 +447,12 @@ async function saveTrackingUpdate() {
       .eq('id', updatingShipmentId);
 
     if (shipError) throw shipError;
+
+    // Notify client & admin about the tracking update
+    const shipment = shipments.find(s => s.id === updatingShipmentId);
+    if (shipment) {
+      await notifyTrackingUpdate(shipment, updateData);
+    }
 
     showToast('Tracking update added successfully.', 'success');
     closeModal('updateModal');
@@ -630,3 +667,202 @@ document.addEventListener('click', (e) => {
     e.target.classList.remove('visible');
   }
 });
+
+
+// ============================================
+// EMAIL NOTIFICATION SYSTEM (EmailJS)
+// Sends professional emails to BOTH client & admin
+// ============================================
+
+function getStatusEmoji(status) {
+  const emojis = {
+    pending: '⏳',
+    order_created: '📋',
+    picked_up: '📦',
+    in_transit: '🚚',
+    on_hold: '⚠️',
+    out_for_delivery: '🏠',
+    delivered: '✅'
+  };
+  return emojis[status] || '📌';
+}
+
+// Helper: send email to one recipient (non-blocking)
+async function sendEmail(toEmail, subject, messageBody) {
+  if (typeof emailjs === 'undefined') {
+    console.warn('EmailJS not loaded — skipping email.');
+    return;
+  }
+  try {
+    await emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, {
+      to_email: toEmail,
+      email_subject: subject,
+      from_name: 'Pet Paws Journey',
+      from_email: ADMIN_EMAIL,
+      from_phone: '+1 (470) 494-2387',
+      subject: subject,
+      message: messageBody,
+      date: new Date().toLocaleDateString('en-US', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' }),
+      time: new Date().toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit', hour12: true })
+    });
+    console.log(`Email sent to ${toEmail}`);
+  } catch (err) {
+    console.error(`Email to ${toEmail} failed:`, err);
+  }
+}
+
+
+// ---- 1. SHIPMENT CREATED NOTIFICATION ----
+async function notifyShipmentCreated(shipmentData) {
+  const trackingUrl = `${window.location.origin}/track.html?code=${shipmentData.tracking_code}`;
+
+  const clientMessage = `
+Hello ${shipmentData.client_name},
+
+Great news! Your pet transport shipment has been created with Pet Paws Journey.
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+📋 SHIPMENT DETAILS
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+🔖 Tracking Code: ${shipmentData.tracking_code}
+🐾 Pet Name: ${shipmentData.pet_name}
+🐕 Pet Type: ${shipmentData.pet_type}${shipmentData.pet_breed ? ' (' + shipmentData.pet_breed + ')' : ''}
+📍 Origin: ${shipmentData.origin_address}
+📍 Destination: ${shipmentData.destination_address}
+📅 Est. Delivery: ${shipmentData.estimated_delivery || 'To be confirmed'}
+📌 Status: Order Created
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+🔗 Track your pet live: ${trackingUrl}
+
+You will receive email notifications whenever your pet's status is updated.
+
+If you have any questions, please contact us:
+📧 Email: petpawsjourney@gmail.com
+📞 Phone: +1 (470) 494-2387
+
+Thank you for choosing Pet Paws Journey!
+— The Pet Paws Journey Team`;
+
+  const adminMessage = `
+📦 NEW SHIPMENT CREATED
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+🔖 Tracking: ${shipmentData.tracking_code}
+🐾 Pet: ${shipmentData.pet_name} (${shipmentData.pet_type})
+👤 Client: ${shipmentData.client_name}
+📧 Client Email: ${shipmentData.client_email}
+📞 Client Phone: ${shipmentData.client_phone || 'N/A'}
+📍 From: ${shipmentData.origin_address}
+📍 To: ${shipmentData.destination_address}
+📅 Est. Delivery: ${shipmentData.estimated_delivery || 'TBD'}
+${shipmentData.special_notes ? '📝 Notes: ' + shipmentData.special_notes : ''}
+
+Client has been notified via email.`;
+
+  // Send sequentially to prevent rate-limiting drops
+  await sendEmail(shipmentData.client_email, `🐾 Shipment Confirmed — ${shipmentData.tracking_code} | Pet Paws Journey`, clientMessage);
+  await sendEmail(shipmentData.shipper_email, `📦 Admin Alert: New Shipment Created — ${shipmentData.tracking_code} | ${shipmentData.client_name}`, adminMessage);
+}
+
+
+// ---- 2. STATUS CHANGED NOTIFICATION (via Edit Modal) ----
+async function notifyStatusChanged(shipment, newStatus) {
+  const emoji = getStatusEmoji(newStatus);
+  const statusLabel = getStatusLabel(newStatus);
+  const trackingUrl = `${window.location.origin}/track.html?code=${shipment.tracking_code}`;
+
+  const clientMessage = `
+Hello ${shipment.client_name},
+
+Your pet transport shipment has been updated.
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+${emoji} STATUS UPDATE
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+🔖 Tracking Code: ${shipment.tracking_code}
+🐾 Pet Name: ${shipment.pet_name}
+📌 New Status: ${statusLabel}
+📅 Updated: ${new Date().toLocaleString('en-US')}
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+🔗 Track your pet live: ${trackingUrl}
+
+If you have any questions, contact us:
+📧 Email: petpawsjourney@gmail.com
+📞 Phone: +1 (470) 494-2387
+
+— The Pet Paws Journey Team`;
+
+  const adminMessage = `
+${emoji} STATUS CHANGED
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+🔖 Tracking: ${shipment.tracking_code}
+🐾 Pet: ${shipment.pet_name}
+👤 Client: ${shipment.client_name} (${shipment.client_email})
+📌 Previous Status: ${getStatusLabel(shipment.current_status)}
+📌 New Status: ${statusLabel}
+
+Client has been notified via email.`;
+
+  // Send sequentially
+  await sendEmail(shipment.client_email, `${emoji} ${shipment.pet_name} — Status: ${statusLabel} | Pet Paws Journey`, clientMessage);
+  await sendEmail(shipment.shipper_email, `🛑 Admin Alert: ${emoji} Status Update — ${shipment.tracking_code} → ${statusLabel}`, adminMessage);
+}
+
+
+// ---- 3. TRACKING UPDATE NOTIFICATION (via Update Modal) ----
+async function notifyTrackingUpdate(shipment, updateData) {
+  const emoji = getStatusEmoji(updateData.status);
+  const statusLabel = getStatusLabel(updateData.status);
+  const trackingUrl = `${window.location.origin}/track.html?code=${shipment.tracking_code}`;
+
+  const clientMessage = `
+Hello ${shipment.client_name},
+
+We have a new tracking update for your pet!
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+${emoji} TRACKING UPDATE
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+🔖 Tracking Code: ${shipment.tracking_code}
+🐾 Pet Name: ${shipment.pet_name}
+📌 Status: ${statusLabel}
+📍 Location: ${updateData.location_address || 'In transit'}
+💬 Details: ${updateData.description || 'No additional details.'}
+📅 Time: ${new Date().toLocaleString('en-US')}
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+🔗 Track your pet live: ${trackingUrl}
+
+Your pet is in safe hands with Pet Paws Journey!
+
+📧 Questions? Contact: petpawsjourney@gmail.com
+📞 Phone: +1 (470) 494-2387
+
+— The Pet Paws Journey Team`;
+
+  const adminMessage = `
+${emoji} TRACKING UPDATE ADDED
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+🔖 Tracking: ${shipment.tracking_code}
+🐾 Pet: ${shipment.pet_name}
+👤 Client: ${shipment.client_name} (${shipment.client_email})
+📌 Status: ${statusLabel}
+📍 Location: ${updateData.location_address || 'N/A'}
+💬 Description: ${updateData.description || 'None'}
+
+Client has been notified via email.`;
+
+  // Send sequentially
+  await sendEmail(shipment.client_email, `${emoji} ${shipment.pet_name} — Tracking Update | Pet Paws Journey`, clientMessage);
+  await sendEmail(shipment.shipper_email, `🛑 Admin Alert: ${emoji} Tracking Update — ${shipment.tracking_code} | ${statusLabel}`, adminMessage);
+}
